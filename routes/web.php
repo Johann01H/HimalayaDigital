@@ -18,8 +18,10 @@ use App\Http\Controllers\Desarrollo\Usuarios\usersHimalayaController;
 use App\Http\Controllers\generalController;
 use App\Http\Controllers\Desarrollo\Roles\rolesController;
 use App\Http\Controllers\fakeDataController;
+use App\Http\Controllers\Proyectos\proyectoController;
 use App\Http\Middleware\DisableCache;
 use App\Http\Middleware\Guest;
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -95,6 +97,11 @@ Route::middleware(['auth', DisableCache::class])->prefix('superadmin')->group(fu
 
         });
 
+
+        Route::controller(proyectoController::class)->group( function(){
+            Route::get('/proyectos','index')->name('Proyectos');
+        });
+
     // Controladores de usuarios SuperAdministrador
 
         Route::controller(usersHimalayaController::class)->group(function(){
@@ -161,6 +168,10 @@ Route::get('/test-session',function(){
 Route::get('testEmail', function () {
     return view('Mails.forgotPassword');
 })->name('testEmail');
+
+Route::get('/interface-restore',function(){
+    return view('login.restorePassword');
+});
 
 //ERRORS VIEWS
 

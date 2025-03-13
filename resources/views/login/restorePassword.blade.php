@@ -55,11 +55,11 @@
     </style>
 </head>
 <body  style="background-color: #003675; background-image: url('vendors/images/Sherpa.png'); background-repeat: no-repeat; background-size: 980px; height: 100px;">
-	<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
+	<div class="flex-wrap login-wrap d-flex align-items-center justify-content-center">
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-md-12">
-					<div class="login-box bg-white box-shadow ">
+					<div class="bg-white login-box box-shadow ">
                         <div class="login-top">
                             <img src="{{ asset('vendors/images/logo-himalaya-login.png') }}" alt="logo-himalaya" style="width: 190">
                         </div>
@@ -84,7 +84,7 @@
 							</div>
 							<div class="row align-items-center">
 								<div class="col-md-12">
-									<div class="input-group mb-0">
+									<div class="mb-0 input-group">
 										<input class="btn btn-success btn-lg btn-block" type="submit" value="Cambiar mi contraseña">
                                     </div>
                                 </div>

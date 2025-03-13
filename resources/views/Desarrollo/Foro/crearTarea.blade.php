@@ -25,7 +25,6 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="col-md-6 recurrencia-campos" style="display: none;">
                         <div class="form-group">
                             <label for="fecha_inicio"><span class="text-danger">*</span> Fecha inicio recurrencia</label>
@@ -48,14 +47,12 @@
                             <small class="text-muted">Tipo de prioridad de la tarea.</small>
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="area"><span class="text-danger">*</span> Seleccione el área para esta tarea</label>
                             <select name="area" id="area" class="form-control"></select>
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="fase"><span class="text-danger">*</span> Fase del proyecto</label>
@@ -91,6 +88,9 @@
 
             <div class="col-md-6">
                 <!-- Aquí puedes agregar más contenido en el futuro si es necesario -->
+
+
+                
             </div>
         </div>
     </form>

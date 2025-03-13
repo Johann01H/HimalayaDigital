@@ -15,21 +15,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, ma  ximum-scale=1">
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icons-style.css') }}">
+
     @stack('CSS')
 
 
 
     <style>
+        body {
+
+            background-color: #003B7B;
+            font-family: "Red Hat Display" !important;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        a {
+            color: #003B7B !important;
+            font-family: "Red Hat Display" !important;
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 500 !important;
+            /* 42px */
+        }
+
         .btn-primary {
-            background-color: #002E60 !important;
-            border-color: #002E60 !important;
-            border: solid 1px #002E60;
+            background-color: #00BDF8 !important;
+            border-color: #00BDF8 !important;
+            border: solid 1px #00BDF8;
         }
 
         .btn-primary:hover {
@@ -37,12 +59,9 @@
             border-color: #204d74 !important;
         }
 
-        .menu-block {
-            background-color: #002E60
-        }
 
         .brand-logo {
-            background-color: #003A81;
+            background-color: #ffff;
             margin-bottom: 20px;
         }
 
@@ -51,42 +70,74 @@
         }
 
         .left-side-bar {
-            background: #002E60;
+            background: #ffff;
+            margin-left: 20px;
+            height: 98%;
+            border-radius: 9px;
         }
 
         .header {
-            background-color: #004EA4;
+            background-color: transparent;
+            box-shadow: none;
+
         }
 
-        .btn-secondary{
+        .btn-secondary {
             background-color: #004EA4;
+            border-color: #004EA4;
         }
 
-        .breadcrumb-item a {
-            color: #fff;
-          }
+        .page-header {
+            padding: 20px;
+            /* El gradiente ayuda a mantener la legibilidad del texto */
+            background: linear-gradient(270deg, rgba(255, 255, 255, 0.00) 0%, rgba(255, 255, 255, 0.60) 69.5%),
+            url('{{ asset(' vendors/images/fondo_header.jpg') }}') !important;
 
-          .breadcrumb-item::before{
-            color: #fff !important;
+            /* Estos son los ajustes clave para controlar qué parte de la imagen se muestra */
+            background-size: cover !important;
+            /* Cubre todo el contenedor */
+            background-position: center top !important;
+            /* Muestra la parte superior-central de la imagen */
+            background-repeat: no-repeat !important;
+            /* Muestra la parte superior-central de la imagen */
 
-          }
+            /* Ajusta la altura para mostrar la porción de la imagen que deseas */
+            height: 120px;
+            /* Ajusta este valor según necesites */
+
+            /* Otros estilos para mejorar la apariencia */
+            border-radius: 5px;
+            margin-bottom: 20px;
+            color: white;
+
+
+        }
+
+        .mCustomScrollBox {
+            background-color: #ffff;
+        }
+
+
+        .sidebar-menu .dropdown-toggle::after
+        {
+        }
     </style>
 
 </head>
 
 <body>
     {{-- <div class="pre-loader">
-		<div class="pre-loader-box">
-			<div class="loader-logo"><img src="{{ asset('vendors/images/deskapp-logo.svg') }}" alt=""></div>
-			<div class='loader-progress' id="progress_div">
-				<div class='bar' id='bar1'></div>
-			</div>
-			<div class='percent' id='percent1'>0%</div>
-			<div class="loading-text">
-				Loading...
-			</div>
-		</div>
-	</div> --}}
+        <div class="pre-loader-box">
+            <div class="loader-logo"><img src="{{ asset('vendors/images/deskapp-logo.svg') }}" alt=""></div>
+            <div class='loader-progress' id="progress_div">
+                <div class='bar' id='bar1'></div>
+            </div>
+            <div class='percent' id='percent1'>0%</div>
+            <div class="loading-text">
+                Loading...
+            </div>
+        </div>
+    </div> --}}
 
     <div class="header">
         <div class="header-left">
@@ -147,23 +198,23 @@
                         </span>
                         <span class="user-name" style="color:#fff">
                             @if(Auth::check())
-                                {{ Auth::user()->nombre }}
+                            {{ Auth::user()->nombre }}
                             @else
-                                Invitado
+                            Invitado
                             @endif
                         </span>
                     </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                            <a class="dropdown-item" href="{{ url('superadmin/profileDevelopment/'. Auth::user()->id) }}">
-                                <i class="dw dw-user1"></i> Perfil
-                            </a>
-                            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                                @csrf
-                                <button type="submit" class="dropdown-item">
-                                    <i class="dw dw-logout"></i> Cerrar sesión
-                                </button>
-                            </form>
-                        </div>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                        <a class="dropdown-item" href="{{ url('superadmin/profileDevelopment/'. Auth::user()->id) }}">
+                            <i class="dw dw-user1"></i> Perfil
+                        </a>
+                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="dropdown-item">
+                                <i class="dw dw-logout"></i> Cerrar sesión
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -195,20 +246,18 @@
                 <h4 class="pb-10 weight-600 font-18">Menu Dropdown Icon</h4>
                 <div class="pb-10 mb-10 sidebar-radio-group">
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebaricon-1" name="menu-dropdown-icon"
-                            class="custom-control-input" value="icon-style-1" checked="">
-                        <label class="custom-control-label" for="sidebaricon-1"><i
-                                class="fa fa-angle-down"></i></label>
+                        <input type="radio" id="sidebaricon-1" name="menu-dropdown-icon" class="custom-control-input"
+                            value="icon-style-1" checked="">
+                        <label class="custom-control-label" for="sidebaricon-1"><i class="fa fa-angle-down"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebaricon-2" name="menu-dropdown-icon"
-                            class="custom-control-input" value="icon-style-2">
-                        <label class="custom-control-label" for="sidebaricon-2"><i
-                                class="ion-plus-round"></i></label>
+                        <input type="radio" id="sidebaricon-2" name="menu-dropdown-icon" class="custom-control-input"
+                            value="icon-style-2">
+                        <label class="custom-control-label" for="sidebaricon-2"><i class="ion-plus-round"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebaricon-3" name="menu-dropdown-icon"
-                            class="custom-control-input" value="icon-style-3">
+                        <input type="radio" id="sidebaricon-3" name="menu-dropdown-icon" class="custom-control-input"
+                            value="icon-style-3">
                         <label class="custom-control-label" for="sidebaricon-3"><i
                                 class="fa fa-angle-double-right"></i></label>
                     </div>
@@ -217,40 +266,38 @@
                 <h4 class="pb-10 weight-600 font-18">Menu List Icon</h4>
                 <div class="mb-10 sidebar-radio-group pb-30">
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebariconlist-1" name="menu-list-icon"
-                            class="custom-control-input" value="icon-list-style-1" checked="">
+                        <input type="radio" id="sidebariconlist-1" name="menu-list-icon" class="custom-control-input"
+                            value="icon-list-style-1" checked="">
                         <label class="custom-control-label" for="sidebariconlist-1"><i
                                 class="ion-minus-round"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebariconlist-2" name="menu-list-icon"
-                            class="custom-control-input" value="icon-list-style-2">
+                        <input type="radio" id="sidebariconlist-2" name="menu-list-icon" class="custom-control-input"
+                            value="icon-list-style-2">
                         <label class="custom-control-label" for="sidebariconlist-2"><i class="fa fa-circle-o"
                                 aria-hidden="true"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebariconlist-3" name="menu-list-icon"
-                            class="custom-control-input" value="icon-list-style-3">
-                        <label class="custom-control-label" for="sidebariconlist-3"><i
-                                class="dw dw-check"></i></label>
+                        <input type="radio" id="sidebariconlist-3" name="menu-list-icon" class="custom-control-input"
+                            value="icon-list-style-3">
+                        <label class="custom-control-label" for="sidebariconlist-3"><i class="dw dw-check"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebariconlist-4" name="menu-list-icon"
-                            class="custom-control-input" value="icon-list-style-4" checked="">
+                        <input type="radio" id="sidebariconlist-4" name="menu-list-icon" class="custom-control-input"
+                            value="icon-list-style-4" checked="">
                         <label class="custom-control-label" for="sidebariconlist-4"><i
                                 class="icon-copy dw dw-next-2"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebariconlist-5" name="menu-list-icon"
-                            class="custom-control-input" value="icon-list-style-5">
+                        <input type="radio" id="sidebariconlist-5" name="menu-list-icon" class="custom-control-input"
+                            value="icon-list-style-5">
                         <label class="custom-control-label" for="sidebariconlist-5"><i
                                 class="dw dw-fast-forward-1"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebariconlist-6" name="menu-list-icon"
-                            class="custom-control-input" value="icon-list-style-6">
-                        <label class="custom-control-label" for="sidebariconlist-6"><i
-                                class="dw dw-next"></i></label>
+                        <input type="radio" id="sidebariconlist-6" name="menu-list-icon" class="custom-control-input"
+                            value="icon-list-style-6">
+                        <label class="custom-control-label" for="sidebariconlist-6"><i class="dw dw-next"></i></label>
                     </div>
                 </div>
 
@@ -262,32 +309,40 @@
     </div>
 
     <div class="left-side-bar">
-        <div class="brand-logo">
+        {{-- <div class="brand-logo">
             <a href="index.html">
-                <img src="{{ asset('vendors/images/logo_himalaya.png') }}" alt="" class="light-logo">
+                <img src="{{ asset('vendors/images/logos himalaya-10.png') }}" alt="" class="light-logo">
             </a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">
                 <i class="ion-close-round"></i>
             </div>
-        </div>
+        </div> --}}
         <div class="menu-block customscroll">
+            <img src="{{ url(asset('vendores/vendors/logo_himalaya.jpg')) }}" alt="">
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
                     <li class="dropdown">
                         <a href="{{ url('superadmin/home') }}" class="dropdown-toggle no-arrow">
-                            <span class="micon fa fa-bank"></span><span class="text font-weight-bold">Home</span>
+                            <span class="micon icon-home"></span><span>Home</span>
                         </a>
-
+                    </li>
+                    <li class="dropdown">
+                        <a href="{{ url('superadmin/proyectos') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon icon-proyectos"></span>
+                            Proyectos</span>
+                        </a>
+                        {{-- <span class="micon icon-crear-roles"></span> --}}
                     </li>
                     <li class="dropdown">
                         <a href="{{ url('superadmin/forumRole') }}" class="dropdown-toggle no-arrow">
-                            <span class="micon ion ion-settings"></span><span class="mtext font-weight-bold">Crear
+                            <span class="micon icon-crear-roles"></span></span>
+                            <span class="mtext ">Crear
                                 roles</span>
                         </a>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" id="dropdownForo">
-                            <span class="micon fa fa-comments"></span><span class="font-weight-bold">Foro</span>
+                            <span class="micon icon-foro"></span><span>Foro</span>
                         </a>
                         <ul class="submenu" id="submenuForo">
                             <li><a href="{{ url('superadmin/forumDesign') }}">Diseño</a></li>
@@ -299,36 +354,24 @@
                         </ul>
                     </li>
 
+
                     <li class="dropdown">
                         <a class="dropdown-toggle" id="subMenu">
-                            <span class="micon dw dw-meeting"></span><span class="mtext font-weight-bold">Clientes
+                            <span class="micon icon-clientes"></span><span>Clientes
                             </span>
                         </a>
                         <ul class="submenu" id="subMenuForo">
                             <li><a href="{{url('')}}">Creación de clientes</a></li>
                             <li><a href="{{url('')}}">Listado de clientes</a></li>
                             <li><a href="">Listar cliente</a></li>
-
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle">
-                            <span class="micon fi fi-torsos-all"></span><span class="mtext font-weight-bold">Mi equipo</span>
+                            <span class="micon icon-equipo"></span><span>Mi equipo</span>
                         </a>
                         <ul class="submenu">
                             <li><a href="{{url('superadmin/usuariosEquipo')}}">Usuarios</a></li>
-                            <li><a href="{{url('superadmin/directorioEquipo')}}">Directorio</a></li>
-                        </ul>
-                    </li>
-
-                    <i class="icon-copy "></i>
-                    <li class="dropdown">
-                        <a  class="dropdown-toggle" id="dropdownForo">
-                            <span class="micon fa fa-cogs"></span><span
-                                class="mtext font-weight-bold">Herramientas</span>
-                        </a>
-                        <ul class="submenu" id="submenuForo">
-                            <li><a href="{{url('superadmin/fasesPlaneacion')}}">Fases de planeación</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -339,18 +382,17 @@
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
-                <div class="page-header ">
+                <div class="page-header">
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
-                            <div class="title">
-                                <h4 class="text-white">{{ $nameRoute }}</h4>
-                            </div>
                             <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="text-white breadcrumb-item active" aria-current="page">{{ $nameRoute }}</li>
+                <span class="icon-home"></span><li><a href="index.html"><span>Home / {{ $nameRoute }} </a></li>
                                 </ol>
                             </nav>
+                            <div class="title">
+                                <h3 style="color: #003B7B">{{ $nameRoute }}</h3>
+                            </div>
                         </div>
                         <div class="text-right col-md-6 col-sm-12">
                             @yield('button-press')
@@ -362,7 +404,7 @@
                     @yield('template-blank-development')
                 </div>
             </div>
-            <div class="mb-20 footer-wrap pd-20 card-box" style="background-color: #002E60; color: #fff">
+            <div class="mb-20 footer-wrap pd-20 card-box" style="color: #003B7B">
                 Copyright © 2017 Himalaya Digital Agency. Todos los derechos reservados.
             </div>
         </div>

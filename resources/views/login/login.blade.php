@@ -23,6 +23,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+
+
+
     <style>
         .login-box {
             background: transparent !important;
@@ -31,7 +34,8 @@
         }
 
         body {
-            color: #FFF;
+            background-color: #ffff;
+            color: #FFFf;
             font-family: "Red Hat Display";
             font-size: 16px;
             font-style: normal;
@@ -46,12 +50,10 @@
         .fa {
             font-size: 25px !important;
         }
-    </style>
 
-
-    <style>
         .login-box {
             max-width: 503px;
+            padding: 0px;
         }
 
         .login-box .login-title {
@@ -103,7 +105,7 @@
         }
 
         h1 {
-            color: #FFF;
+            color: #003B7B;
             font-family: "Red Hat Display";
             font-size: 60px;
             font-style: normal;
@@ -116,22 +118,73 @@
         }
 
         .button-color {
-            background-color: #00BDF8
+            background-color: #00BDF8;
+            border-radius: 10px;
+            font-weight:700;
+            font-size: 16px;
+            font-family: "Red Hat Display";
+            color: #fff;
         }
 
-        small {
-            color: #FFF;
+
+        .button-color:hover {
+            opacity: 0.8;
+        }
+
+        .text-start small {
+            color: #003B7B;
             font-family: "Red Hat Display";
             font-size: 18px;
             font-style: normal;
             font-weight: 400;
             line-height: normal;
         }
+
+        .row-texts>div:nth-child(2)>.texts-rows {
+            color: #003B7B;
+            font-weight: 700;
+            font-weight: bolder;
+            padding-left: 37px;
+        }
+
+        .row-texts>div:nth-child(2)>.texts-rows:hover {
+            opacity: 0.8;
+        }
+
+        .row-texts>div:nth-child(1)>.texts-rows {
+            font-size: 16px;
+            color: #003B7B;
+            font-weight: 400;
+
+        }
+
+        .input-checkbox {
+            width: 19px;
+            height: 19px;
+            flex-shrink: 0;
+        }
+        .form-control:focus
+        {
+            border-color: #00BDF8 !important;
+            box-lines: 25px;:
+        }
+
+        .btn:hover
+        {
+            color: #ffff;
+            opacity: 0.8;
+        }
+
+        .img-right
+        {
+            max-width: 86% !important;
+        }
+
     </style>
 
 </head>
 
-<body style="background-color: #003675;">
+<body>
     @if (session('showModal'))
     <script>
         window.onload = function() {
@@ -158,11 +211,10 @@
     </div>
     <div class="flex-wrap login-wrap d-flex align-items-center justify-content-center">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row ">
                 <div class="col-md-6 ">
                     <div class="bg-white login-box box-shadow ">
-                        <img src="{{ asset('vendors/images/logo_himalaya_Blue-10 1.png') }}" alt="logo_himalaya"
-                            class="pb-6">
+                        <img src="{{ asset('vendors/images/logo_himalaya_blue.png') }}" alt="logo_himalaya" class="pb-5 img-right">
                         <div class="text-start">
                             <h1 style="height: 69px;">Bienvenido</h1>
                             <small> Accede a tu espacio de trabajo y colabora con tu equipo.</small>
@@ -193,7 +245,7 @@
                             <div class="alert alert-danger" id="error-alert">
                                 {{ $message }}
                             </div>
-                        </div>
+                    </div>
 
                     @enderror
                     @if (session('loginError'))
@@ -206,19 +258,20 @@
                         </button>
                     </div>
                     @endif
-                    <div class="row pb-30">
-                        <div class="col-6">
-                            <input type="checkbox" class="input-checkbox">
-                            <label name="remember" for="customCheck1">Mantenerme conectado</label>
+                    <div class="row pb-30 row-texts">
+                        <div class="col-md-6">
+                            <input type="checkbox" class="px-5 input-checkbox">
+                            <label name="remember" class="pl-2 texts-rows" for="customCheck1">Mantenerme
+                                conectado</label>
                         </div>
-                        <div class="col-6">
-                            <a href="{{ url('forgotPassword') }}" class="text-white ">¿Olvido su contraseña?</a>
+                        <div class="col-md-6">
+                            <a href="{{ url('forgotPassword') }}" class="texts-rows">¿Olvido su contraseña?</a>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="text-white btn button-color btn-block btn-lg" type="submit">Iniciar
+                            <button class="btn button-color btn-block btn-lg" type="submit">Iniciar
                                 sesión</button>
                         </div>
                     </div>
@@ -226,7 +279,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <img src="{{ asset('vendors/images/portada_derecha.png') }}" alt="">
+                <img src="{{ asset('vendors/images/photo_right.png') }}" alt="img" class="img-right">
             </div>
         </div>
     </div>

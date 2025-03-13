@@ -65,21 +65,21 @@
     @endpush
 
 
-    <div class="pb-20 p-2">
+    <div class="p-2 pb-20">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4 pb-3">
+                <div class="pb-3 col-md-4">
                     <label for="filter-mes">Estados</label>
                     <input type="search" name="" id="" class="form-control" placeholder="Cambiar estado">
                 </div>
 
                 <div class="vertical-line"></div>
-                <div class="col-md-4 pb-3">
+                <div class="pb-3 col-md-4">
                     {{-- Espacio en blanco para conservar el espacio --}}
                 </div>
                 <div class="vertical-line"></div>
 
-                <div class="col-md-3 pb-3">
+                <div class="pb-3 col-md-3">
                     <a href="" class="btn btn-success input-buttom col-12">Crear tarea</a>
                 </div>
 
@@ -128,14 +128,14 @@
                         <div class="vertical-line"></div>
                         <div class="col-md-3 input-buttom">
                             <div class="row">
-                                <spam class="mt-2 px-2">Mostrar</spam>
+                                <spam class="px-2 mt-2">Mostrar</spam>
                                 <select name="" id="" class="form-control col-3">
                                     <option value="">10</option>
                                     <option value="1">25</option>
                                     <option value="2">50</option>
                                     <option value="3">100</option>
                                 </select>
-                                <span class="mt-2 px-2">registros</span>
+                                <span class="px-2 mt-2">registros</span>
                             </div>
                         </div>
                     </div>
@@ -146,7 +146,7 @@
         </div>
     </div>
 
-    <table class="data-table table stripe hover nowrap">
+    <table class="table data-table stripe hover nowrap">
         <thead class="text-center" style="color:white; background-color: #002E60">
             <tr>
                 <th class="table-plus datatable-nosort">OT</th>

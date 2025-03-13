@@ -10,9 +10,13 @@
         <style>
             .general-container
             {
+
                 background-color: transparent !important;
                 box-shadow: none !important;
+                padding:0px;
+                
             }
+
         </style>
     @endpush
 

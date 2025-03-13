@@ -15,31 +15,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="vendors/styles/core.css">
     <link rel="stylesheet" type="text/css" href="vendors/styles/icon-font.min.css">
     <link rel="stylesheet" type="text/css" href="vendors/styles/style.css">
 
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-119386393-1');
-    </script>
-
-
     <style>
+        body {
+            background-color: #003B7B;
+            color: #ffff font-family: "Red Hat Display";
+            font-size: 19px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
         .login-box {
-            max-width: 460px;
+            max-width: 499px;
+
         }
 
         .login-box .login-title {
@@ -91,79 +87,111 @@
         }
 
         .login-box {
-            background: rgba(0, 46, 96, 0.75) !important;
+            background: transparent !important;
             color: white;
+            box-shadow: none;
         }
 
+        .btn-primary
+        {
+            background-color: #00BDF8;
+            border-color: #00BDF8;
+        }
         .fa {
             font-size: 40px;
         }
 
-        .alert-dismissible{
+        .alert-dismissible {
             padding-right: 2rem !important;
+        }
+
+        h2 {
+            color: #FFF;
+            font-family: "Red Hat Display";
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        h6 {
+            color: #FFF;
+            font-family: "Red Hat Display";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        .img-logo
+        {
+            margin-left: 73px;
+            width: 10rem ;
+            margin-bottom: 5rem;
+        }
+
+        .img-right
+        {
+            max-width: 86% !important;
         }
     </style>
 </head>
 
-<body
-    style="background-color: #003675; background-image: url('vendors/images/Sherpa.png'); background-repeat: no-repeat; background-size: 980px; height: 100px;">
-    <div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
+<body>
+    <div class="flex-wrap login-wrap d-flex align-items-center justify-content-center">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-12">
-                    <div class="login-box bg-white box-shadow">
-                        <div class="login-title">
-                            <img src="{{ asset('vendors/images/logo-himalaya-login.png') }}" alt="logo_himalaya"
-                                style="width: 190">
-                        </div>
-                        <h6 class="mb-20 text-center text-white">Ingresa tu dirección de correo electrónico para
-                            restablecer tu contraseña</h6>
+            <div class="row ">
+                <div class="col-md-6">
+                    <img src="{{ asset('vendors/images/logo_himalaya_Blue-10 1.png') }}" class="img-logo " alt="logo_himalaya">
+                    <div class="bg-white login-box box-shadow" >
+                        <h2>Las contraseñas se olvidan, <br> las grandes ideas no.</h2>
+                        <h6 class="mb-20 text-white">Restablécela aquí.</h6>
                         <form method="POST" action="{{ url('storeForgotPassword') }}">
                             @csrf
                             <div class="input-group custom">
                                 <input type="email" class="form-control form-control-lg" name="email"
-                                    placeholder="user@email.com" value="{{ old('email') }}" required>
+                                    placeholder="Mail" value="{{ old('email') }}" required>
                                 <div class="input-group-append custom">
-                                    <span class="input-group-text"><i
-                                            class="fa fa-envelope-o"aria-hidden="true"></i></span>
+                                    <span class="input-group-text"></span>
                                 </div>
                             </div>
                             @if (session('successEmail'))
-                                <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                                    <i class="icon-copy fa fa-check-circle" aria-hidden="true"></i>
-                                    <br>
-                                    {{ session('successEmail') }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+                            <div class="text-center alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="icon-copy fa fa-check-circle" aria-hidden="true"></i>
+                                <br>
+                                {{ session('successEmail') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             @endif
                             @if (session('errorEmail'))
-                                <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-                                    <i class="icon-copy fa fa-warning" aria-hidden="true"></i>
-                                    <br>
-                                    {{ session('errorEmail') }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+                            <div class="text-center alert alert-warning alert-dismissible fade show" role="alert">
+                                <i class="icon-copy fa fa-warning" aria-hidden="true"></i>
+                                <br>
+                                {{ session('errorEmail') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             @endif
                             <div class="row align-items-center">
-                                <div class="col-5">
-                                    <div class="input-group mb-0">
-                                        <input class="btn btn-success btn-lg btn-block" type="submit" value="Enviar">
+                                <div class="col-6">
+                                    <div class="mb-0 input-group">
+                                        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Enviar">
                                     </div>
                                 </div>
-                                <div class="col-2">
-                                </div>
-                                <div class="col-5">
-                                    <div class="input-group mb-0">
-                                        <a class="btn btn-info btn-lg btn-block" href="{{ url('login') }}">Volver</a>
+
+                                <div class="col-6">
+                                    <div class="mb-0 input-group">
+                                        <a class="btn btn-secondary btn-lg btn-block" href="{{ url('login') }}">Volver</a>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="{{ asset('vendors/images/photo_right_blue.png') }}" class="img-right" alt="" srcset="">
                 </div>
             </div>
         </div>

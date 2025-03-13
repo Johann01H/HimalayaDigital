@@ -102,5 +102,10 @@
     </script>
 
 @endpush
-
+@push('JS')
+    <script src="{{ url('vendors/scripts/core.js')  }}"></script>
+    <script src="{{ url('vendors/scripts/script.min.js') }}"></script>
+    <script src="{{ url('vendors/scripts/process.js') }}"></script>
+    <script src="{{ url('vendors/scripts/layout-settings.js') }}"></script>
+@endpush
 @endsection

@@ -103,7 +103,7 @@
                 <th>Email</th>
                 <th>Cargo</th>
                 <th>Teléfono</th>
-                <th>Número de referencia</th>
+                <th>Referencia</th>
                 <th>Rol</th>
                 <th>Area</th>
                 <th>Estado</th>
@@ -114,18 +114,29 @@
 </div>
 
 @push('JS')
-{{-- <script src="src/plugins/datatables/js/dataTables.responsive.min.js"></script>
-<script src="vendors/scripts/datatable-setting.js"></script> --}}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Cargar dependencias base primero -->
+<script src="{{ asset('vendors/scripts/core.js') }}"></script>
+<script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
+<script src="{{ asset('vendors/scripts/process.js') }}"></script>
+
+<!-- Luego cargar plugins de DataTables -->
 <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
 
 <script>
     $(document).ready(function(){
-        $('.data-table-usuario').DataTable({
-            ajax: "{{ route('api.user') }}",
+        const dataTable = $('.data-table-usuario').DataTable({
+            ajax: {
+                url: "{{ route('api.user') }}",
+                error: function(xhr, error, thrown) {
+                    console.error('Error al cargar datos:', error);
+                    alert('Error al cargar los datos de usuarios. Por favor, recargue la página o contacte al administrador.');
+                }
+            },
             columns: [
                 { data: 'nombre' },
                 { data: 'apellido' },
@@ -137,36 +148,37 @@
                 { data: 'areas.nombre', defaultContent: 'Sin área' },
                 { data: 'estado', render: function(data) {
                         return data
-                            ? '<span class="badge badge-success rounded-pill">Activo</span>'
-                            : '<span class="badge badge-danger rounded-pill">Inactivo</span>';
+                            ? '<span class="badge badge-success rounded-pill"> Activo </span>'
+                            : '<span class="badge badge-danger rounded-pill"> Inactivo </span>';
                     }
                 },
                 { data: 'id', render: function(data){
                     return `<a href="/editUser/${data}" class="text-white btn btn-primary col-12 rounded-pill"><i class="dw dw-edit2"></i></a>`;
                 }}
             ],
-            responsive: false,
+            responsive: true,
             language: {
                 url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
             }
         });
     });
+</script>
 
-</script>
 <script>
     $(document).ready(function() {
-            @if ('updateSuccess')
-                $('#update-success-modal').modal('show');
-            @endif
-        });
+        @if(session('updateSuccess'))
+            $('#update-success-modal').modal('show');
+        @endif
+    });
 </script>
+
 <script>
     $(document).ready(function() {
+        @if(session('success'))
             $('#success-modal').modal('show');
-        });
+        @endif
+    });
 </script>
-
-
 @endpush
 
 @endsection

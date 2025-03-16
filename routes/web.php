@@ -18,6 +18,7 @@ use App\Http\Controllers\Desarrollo\Usuarios\usersHimalayaController;
 use App\Http\Controllers\generalController;
 use App\Http\Controllers\Desarrollo\Roles\rolesController;
 use App\Http\Controllers\fakeDataController;
+use App\Http\Controllers\Proyectos\clientesController;
 use App\Http\Controllers\Proyectos\proyectoController;
 use App\Http\Middleware\DisableCache;
 use App\Http\Middleware\Guest;
@@ -98,15 +99,15 @@ Route::middleware(['auth', DisableCache::class])->prefix('superadmin')->group(fu
         });
 
 
-        Route::controller(proyectoController::class)->group( function(){
-            Route::get('/proyectos','index')->name('Proyectos');
+        Route::controller(clientesController::class)->group( function(){
+            Route::get('/Clientes','index')->name('Clientes');
         });
 
     // Controladores de usuarios SuperAdministrador
 
         Route::controller(usersHimalayaController::class)->group(function(){
 
-            Route::get('/usuariosEquipo','index')->name('usuarios');
+            Route::get('/usuariosEquipo','index')->name('Usuarios');
             Route::get('/apiUser','apiUser')->name('api.user');
             Route::get('/createUser','create')->name('Registrar nuevo usuario');
             Route::get('/editUser/{id}','edit')->name('Actualizar detalles del usuario');

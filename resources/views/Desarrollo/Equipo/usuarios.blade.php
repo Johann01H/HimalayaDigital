@@ -33,6 +33,18 @@
         color: #ffff !important;
         font-size: medium !important;
     }
+
+
+    .data-table-usuario thead tr th:first-child {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+    
+    .data-table-usuario thead tr th:last-child {
+        border-top-right-radius: 10px !important;
+        border-bottom-right-radius: 10px !important;
+    }
+
 </style>
 @endpush
 

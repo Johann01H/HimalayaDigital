@@ -26,8 +26,6 @@
 
     @stack('CSS')
 
-
-
     <style>
         body {
 
@@ -37,6 +35,39 @@
             font-style: normal;
             font-weight: 700;
             line-height: normal;
+        }
+
+        .sidebar-menu .dropdown-toggle:hover,
+        .sidebar-menu .show>.dropdown-toggle {
+            background: none !important;
+
+        }
+
+
+        .sidebar-menu .dropdown-toggle:hover .micon ,
+        .sidebar-menu .show>.dropdown-toggle .micon {
+            background-color: #25AFDB !important;
+            /* Color azul para el fondo */
+            color: white !important;
+            /* Color blanco para el icono */
+            border-radius: 50% !important;
+            /* Forma redonda */
+            padding: 5px !important;
+            /* Espacio alrededor del icono */
+            transition: all 0.3s ease !important;
+            /* Animación suave */
+        }
+
+        .sidebar-menu .dropdown-toggle:hover::after,
+        .sidebar-menu .show>.dropdown-toggle::after {
+            content: '' !important;
+            display: block !important;
+            width: 29% !important;
+            height: 3px !important;
+            background-color: #e60000 !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 63px !important;
         }
 
         a {
@@ -70,11 +101,12 @@
         }
 
         .left-side-bar {
+            width: 255px !important;
             background: #ffff;
-            margin-left: 20px;
-            height: 98%;
-            border-radius: 9px;
+            margin-left: 28px;
+            border-radius: 9px !important;
         }
+
 
         .header {
             background-color: transparent;
@@ -88,38 +120,18 @@
         }
 
         .page-header {
+            background: url('{{ asset('vendors/images/page-header.jpg') }}');
             padding: 20px;
-            /* El gradiente ayuda a mantener la legibilidad del texto */
-            background: linear-gradient(270deg, rgba(255, 255, 255, 0.00) 0%, rgba(255, 255, 255, 0.60) 69.5%),
-            url('{{ asset(' vendors/images/fondo_header.jpg') }}') !important;
-
-            /* Estos son los ajustes clave para controlar qué parte de la imagen se muestra */
             background-size: cover !important;
-            /* Cubre todo el contenedor */
             background-position: center top !important;
-            /* Muestra la parte superior-central de la imagen */
             background-repeat: no-repeat !important;
-            /* Muestra la parte superior-central de la imagen */
-
-            /* Ajusta la altura para mostrar la porción de la imagen que deseas */
             height: 120px;
-            /* Ajusta este valor según necesites */
-
-            /* Otros estilos para mejorar la apariencia */
-            border-radius: 5px;
             margin-bottom: 20px;
-            color: white;
-
-
         }
+
 
         .mCustomScrollBox {
             background-color: #ffff;
-        }
-
-
-        .sidebar-menu .dropdown-toggle::after
-        {
         }
     </style>
 
@@ -192,20 +204,21 @@
             </div>
             <div class="user-info-dropdown">
                 <div class="dropdown">
-                    <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" style="color: white">
+                    <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                        style="color: white">
                         <span class="user-icon">
                             <img src="{{ asset('storage/images' . Auth::user()->img_perfil) }}">
                         </span>
                         <span class="user-name" style="color:#fff">
-                            @if(Auth::check())
-                            {{ Auth::user()->nombre }}
+                            @if (Auth::check())
+                                {{ Auth::user()->nombre }}
                             @else
-                            Invitado
+                                Invitado
                             @endif
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                        <a class="dropdown-item" href="{{ url('superadmin/profileDevelopment/'. Auth::user()->id) }}">
+                        <a class="dropdown-item" href="{{ url('superadmin/profileDevelopment/' . Auth::user()->id) }}">
                             <i class="dw dw-user1"></i> Perfil
                         </a>
                         <form action="{{ route('logout') }}" method="POST" style="display: inline;">
@@ -246,18 +259,20 @@
                 <h4 class="pb-10 weight-600 font-18">Menu Dropdown Icon</h4>
                 <div class="pb-10 mb-10 sidebar-radio-group">
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebaricon-1" name="menu-dropdown-icon" class="custom-control-input"
-                            value="icon-style-1" checked="">
-                        <label class="custom-control-label" for="sidebaricon-1"><i class="fa fa-angle-down"></i></label>
+                        <input type="radio" id="sidebaricon-1" name="menu-dropdown-icon"
+                            class="custom-control-input" value="icon-style-1" checked="">
+                        <label class="custom-control-label" for="sidebaricon-1"><i
+                                class="fa fa-angle-down"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebaricon-2" name="menu-dropdown-icon" class="custom-control-input"
-                            value="icon-style-2">
-                        <label class="custom-control-label" for="sidebaricon-2"><i class="ion-plus-round"></i></label>
+                        <input type="radio" id="sidebaricon-2" name="menu-dropdown-icon"
+                            class="custom-control-input" value="icon-style-2">
+                        <label class="custom-control-label" for="sidebaricon-2"><i
+                                class="ion-plus-round"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebaricon-3" name="menu-dropdown-icon" class="custom-control-input"
-                            value="icon-style-3">
+                        <input type="radio" id="sidebaricon-3" name="menu-dropdown-icon"
+                            class="custom-control-input" value="icon-style-3">
                         <label class="custom-control-label" for="sidebaricon-3"><i
                                 class="fa fa-angle-double-right"></i></label>
                     </div>
@@ -266,38 +281,40 @@
                 <h4 class="pb-10 weight-600 font-18">Menu List Icon</h4>
                 <div class="mb-10 sidebar-radio-group pb-30">
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebariconlist-1" name="menu-list-icon" class="custom-control-input"
-                            value="icon-list-style-1" checked="">
+                        <input type="radio" id="sidebariconlist-1" name="menu-list-icon"
+                            class="custom-control-input" value="icon-list-style-1" checked="">
                         <label class="custom-control-label" for="sidebariconlist-1"><i
                                 class="ion-minus-round"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebariconlist-2" name="menu-list-icon" class="custom-control-input"
-                            value="icon-list-style-2">
+                        <input type="radio" id="sidebariconlist-2" name="menu-list-icon"
+                            class="custom-control-input" value="icon-list-style-2">
                         <label class="custom-control-label" for="sidebariconlist-2"><i class="fa fa-circle-o"
                                 aria-hidden="true"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebariconlist-3" name="menu-list-icon" class="custom-control-input"
-                            value="icon-list-style-3">
-                        <label class="custom-control-label" for="sidebariconlist-3"><i class="dw dw-check"></i></label>
+                        <input type="radio" id="sidebariconlist-3" name="menu-list-icon"
+                            class="custom-control-input" value="icon-list-style-3">
+                        <label class="custom-control-label" for="sidebariconlist-3"><i
+                                class="dw dw-check"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebariconlist-4" name="menu-list-icon" class="custom-control-input"
-                            value="icon-list-style-4" checked="">
+                        <input type="radio" id="sidebariconlist-4" name="menu-list-icon"
+                            class="custom-control-input" value="icon-list-style-4" checked="">
                         <label class="custom-control-label" for="sidebariconlist-4"><i
                                 class="icon-copy dw dw-next-2"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebariconlist-5" name="menu-list-icon" class="custom-control-input"
-                            value="icon-list-style-5">
+                        <input type="radio" id="sidebariconlist-5" name="menu-list-icon"
+                            class="custom-control-input" value="icon-list-style-5">
                         <label class="custom-control-label" for="sidebariconlist-5"><i
                                 class="dw dw-fast-forward-1"></i></label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="sidebariconlist-6" name="menu-list-icon" class="custom-control-input"
-                            value="icon-list-style-6">
-                        <label class="custom-control-label" for="sidebariconlist-6"><i class="dw dw-next"></i></label>
+                        <input type="radio" id="sidebariconlist-6" name="menu-list-icon"
+                            class="custom-control-input" value="icon-list-style-6">
+                        <label class="custom-control-label" for="sidebariconlist-6"><i
+                                class="dw dw-next"></i></label>
                     </div>
                 </div>
 
@@ -327,17 +344,15 @@
                         </a>
                     </li>
                     <li class="dropdown">
-                        <a href="{{ url('superadmin/proyectos') }}" class="dropdown-toggle no-arrow">
-                            <span class="micon icon-proyectos"></span>
-                            Proyectos</span>
-                        </a>
-                        {{-- <span class="micon icon-crear-roles"></span> --}}
-                    </li>
-                    <li class="dropdown">
                         <a href="{{ url('superadmin/forumRole') }}" class="dropdown-toggle no-arrow">
                             <span class="micon icon-crear-roles"></span></span>
-                            <span class="mtext ">Crear
-                                roles</span>
+                            <span class="mtext ">Crear roles</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="{{ url('superadmin/proyectos') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon icon-proyectos"></span>
+                            Clientes</span>
                         </a>
                     </li>
                     <li class="dropdown">
@@ -353,25 +368,12 @@
                             <li><a href="{{ url('superadmin/forumCreateHomework') }}">Cr@eación de tareas</a></li>
                         </ul>
                     </li>
-
-
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" id="subMenu">
-                            <span class="micon icon-clientes"></span><span>Clientes
-                            </span>
-                        </a>
-                        <ul class="submenu" id="subMenuForo">
-                            <li><a href="{{url('')}}">Creación de clientes</a></li>
-                            <li><a href="{{url('')}}">Listado de clientes</a></li>
-                            <li><a href="">Listar cliente</a></li>
-                        </ul>
-                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle">
                             <span class="micon icon-equipo"></span><span>Mi equipo</span>
                         </a>
                         <ul class="submenu">
-                            <li><a href="{{url('superadmin/usuariosEquipo')}}">Usuarios</a></li>
+                            <li><a href="{{ url('superadmin/usuariosEquipo') }}">Usuarios</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -387,7 +389,8 @@
                         <div class="col-md-6 col-sm-12">
                             <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
-                <span class="icon-home"></span><li><a href="index.html"><span>Home / {{ $nameRoute }} </a></li>
+                                    <span class="icon-home"></span>
+                                    <li><a href="index.html"><span>Home / {{ $nameRoute }} </a></li>
                                 </ol>
                             </nav>
                             <div class="title">

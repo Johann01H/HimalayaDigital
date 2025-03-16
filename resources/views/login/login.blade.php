@@ -166,7 +166,6 @@
         .form-control:focus
         {
             border-color: #00BDF8 !important;
-            box-lines: 25px;:
         }
 
         .btn:hover

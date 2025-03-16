@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Proyectos;
+namespace App\Http\Controllers\Desarrollo\Clientes;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-class proyectoController
+class clientesController
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class proyectoController
     public function index()
     {
         $nameRoute = Route::currentRouteName();
-        return view('Desarrollo.Proyectos.proyectos',compact('nameRoute'));
+        return view('Desarrollo.Clientes.clientes',compact('nameRoute'));
     }
 
     /**

@@ -18,10 +18,10 @@ use App\Http\Controllers\Desarrollo\Usuarios\usersHimalayaController;
 use App\Http\Controllers\generalController;
 use App\Http\Controllers\Desarrollo\Roles\rolesController;
 use App\Http\Controllers\fakeDataController;
-use App\Http\Controllers\Proyectos\clientesController;
-use App\Http\Controllers\Proyectos\proyectoController;
+use App\Http\Controllers\Desarrollo\Clientes\clientesController;
 use App\Http\Middleware\DisableCache;
 use App\Http\Middleware\Guest;
+use App\Http\Middleware\RememberMe;
 use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -53,7 +53,7 @@ Route::post('logout', function (Request $request) {
 })->name('logout');
 
 
-Route::middleware(['auth', DisableCache::class])->prefix('superadmin')->group(function () {
+Route::middleware(['auth', DisableCache::class, RememberMe::class])->prefix('superadmin')->group(function () {
 
 
         Route::get('/home', [generalController::class, 'homeDevelopment'])->name('Página principal');

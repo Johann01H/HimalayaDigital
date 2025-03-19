@@ -22,6 +22,7 @@ class loginController
             'email.exists' => 'No encontramos un usuario con ese correo electrónico.',
         ];
 
+
         $request->validate([
             'email' => ['required', 'email', 'exists:users,email'],
             'password' => ['required'],
@@ -29,22 +30,24 @@ class loginController
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        $remember = $request->has('remember');
+
+
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            $roleUser = Auth::user()->roles_id;
 
-            switch ($roleUser) {
-                case 1:
-                    return redirect()->route('Página principal');
-                case 3:
-                    return redirect()->route('Home Administrador');
-                case 4:
-                    return redirect()->route('Home Colaborador');
-            }
+            return redirect()->route([
+                1 => 'Página principal',
+                2 => 'Home Administrador',
+                3 => 'Home Colaborador',
+            ][Auth::user()->roles_id] ?? 'login');
+
+        } else {
+            return redirect()->route('login')->with('loginError', 'Las credenciales ingresadas no son correctas. Verifique su correo y contraseña e intente nuevamente.');
         }
-
-        return redirect()->route('login')->with('loginError', 'Las credenciales ingresadas no son correctas. Verifica tu correo y contraseña e intenta nuevamente.');
+        ;
     }
+
 
 
 }

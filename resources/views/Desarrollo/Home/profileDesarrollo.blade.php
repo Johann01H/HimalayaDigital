@@ -25,7 +25,7 @@
             <div class="pd-20 card-box height-100-p">
                 <div class="profile-photo">
                     <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a>
-                    <img src="vendors/images/photo1.jpg" alt="" class="avatar-photo">
+                    <img src="{{asset('vendors/images/photo1.jpg')}}" alt="" class="avatar-photo">
                     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -34,8 +34,13 @@
                                     <div class="img-container">
                                             @csrf
                                             @method('PUT')
+                                            <img id="image" src="
+                                            {{ 
+                                                asset($userAuthenticate->img_perfil ? 'storage/images/' . $userAuthenticate->img_perfil : 'vendors/images/default.png')  }}" 
+                                                alt="Picture" 
+                                                enctype="multipart/form-data"
 
-                                            <img id="image" src="{{ asset('storage/images/'. $userAuthenticate->img_perfil) }}" alt="Picture" enctype="multipart/form-data">
+                                            >
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -53,7 +58,6 @@
                 <div class="profile-info">
                     <h5 class="mb-20 h5 text-blue">Información de contacto</h5>
                     <ul>
-
                         <li>
                             <span>Dirección de correo electrónico:</span>
                             {{ $userAuthenticate->email ?? '¡No es posible encontrar un correo electronico!' }}
@@ -76,11 +80,11 @@
                         </li>
                         <li>
                             <span>Rol:</span>
-                            {{ $userAuthenticate->roles->nombre ?? '¡No es posible encontrar el rol especificado!.' }}
+                            {{ $userAuthenticate->role_name ?? '¡No es posible encontrar el rol especificado!.' }}
                         </li>
                         <li>
                             <span>Area asignada:</span>
-                            {{ $userAuthenticate->areas->nombre ?? '¡No es posible encontrar el area asignada!.' }}
+                            {{ $userAuthenticate->area_name ?? '¡No es posible encontrar el area asignada!.' }}
                         </li>
                     </ul>
                 </div>

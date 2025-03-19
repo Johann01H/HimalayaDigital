@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Desarrollo\Roles;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use App\Models\Role;
 class rolesController
 {
@@ -11,8 +12,8 @@ class rolesController
      */
     public function index()
     {
-        $Roles = Role::all();
-        $nameRoute = \Route::currentRouteName();
+        $Roles = Role::select(['id','display_name','descripcion'])->get();
+        $nameRoute = Route::currentRouteName();
         return view('Desarrollo.Roles.foro_roles',compact('nameRoute','Roles'));
     }
 
@@ -21,7 +22,7 @@ class rolesController
      */
     public function create()
     {
-        $nameRoute = \Route::currentRouteName();
+        $nameRoute = Route::currentRouteName();
         return view('Desarrollo.Roles.roles_create',compact('nameRoute'));
     }
 

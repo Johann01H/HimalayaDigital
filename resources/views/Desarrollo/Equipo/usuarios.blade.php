@@ -24,6 +24,7 @@
         color: white !important;
     }
 
+    
     .table-plus::before {
         color: #ffff !important;
         font-size: medium !important;
@@ -45,7 +46,9 @@
         border-bottom-right-radius: 10px !important;
     }
 
+
 </style>
+
 @endpush
 
 @section('button-press')
@@ -107,7 +110,7 @@
 @endif
 
 <div class="pb-20">
-    <table class="table data-table-usuario hover">
+    <table class="table table-striped data-table-usuario hover wrapper">
         <thead>
             <tr class="color-header-table">
                 <th>Nombre</th>
@@ -141,7 +144,7 @@
 
 <script>
     $(document).ready(function(){
-        const dataTable = $('.data-table-usuario').DataTable({
+        $('.data-table-usuario').DataTable({
             ajax: {
                 url: "{{ route('api.user') }}",
                 error: function(xhr, error, thrown) {

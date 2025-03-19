@@ -24,10 +24,20 @@ class generalController
 
     public function showProfileUser($id)
     {
-        $usuarios = User::all();
         $nameRoute = Route::currentRouteName();
-        $userAuthenticate = User::findOrFail($id);
-        return view('Desarrollo.Home.profileDesarrollo',compact('nameRoute','userAuthenticate','usuarios'));
+        $userAuthenticate = User::select([
+            'users.id', 'users.nombre', 'users.apellido', 'users.email', 
+            'users.img_perfil', 'users.direccion', 'users.telefono', 
+            'users.numero_referencia','users.fecha_nacimiento', 
+            'roles.id as role_id', 'roles.nombre as role_name', 
+            'areas.id as area_id', 'areas.nombre as area_name'
+        ])
+        ->leftJoin('roles', 'users.roles_id', '=', 'roles.id')
+        ->leftJoin('areas', 'users.areas_id', '=', 'areas.id')
+        ->where('users.id', $id)
+        ->firstOrFail();
+    
+        return view('Desarrollo.Home.profileDesarrollo',compact('nameRoute','userAuthenticate'));
 
     }
 

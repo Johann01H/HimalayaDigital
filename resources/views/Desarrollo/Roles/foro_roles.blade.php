@@ -12,22 +12,31 @@
                 background-color: #15baee !important;
             }
 
-            .color-header-table{
+            .color-header-table {
                 background-color: #004EA4 !important;
                 color: #fff !important;
             }
 
-            .table-plus::before
-            {
+            .table-plus::before {
                 color: #ffff !important;
                 font-size: medium !important;
             }
-        </style>
 
+            .data-table-usuario thead tr th:first-child {
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+            }
+
+            .data-table-usuario thead tr th:last-child {
+                border-top-right-radius: 10px !important;
+                border-bottom-right-radius: 10px !important;
+            }
+        </style>
     @endpush
 
 @section('button-press')
-    <a href="{{ url('superadmin/createRoles') }}" class="btn btn-secondary"><i class="icon-copy fa fa-plus" aria-hidden="true"></i>
+    <a href="{{ url('superadmin/createRoles') }}" class="btn btn-secondary"><i class="icon-copy fa fa-plus"
+            aria-hidden="true"></i>
         Establecer un rol</a>
 @endsection
 
@@ -56,19 +65,17 @@
 @endif
 
 <div class="pb-20">
-    <table class="table data-table-usuario stripe hover ">
+    <table class="table table-striped data-table-usuario stripe hover ">
         <thead>
             <tr class="color-header-table">
                 <th class="table-plus datatable-nosort">Nombre lógico</th>
                 <th>Nombre a mostrar</th>
                 <th>Descripción</th>
-                <th>Edicion</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($Roles as $role)
                 <tr>
-                    <td class="table-plus">{{ $role->nombre ?? 'Rol indefinido.' }}</td>
                     <td>{{ $role->display_name }}</td>
                     <td>
                         @if (isset($role->descripcion))
@@ -78,15 +85,15 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ url('editRoles/' . $role->id) }}" class="btn btn-primary d-flex justify-content-center col-6"><i class="text-white fa fa-edit"></i></a>
+                        <a href="{{ url('editRoles/' . $role->id) }}"
+                            class="btn btn-primary d-flex justify-content-center col-6"><i
+                                class="text-white fa fa-edit"></i></a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 </div>
-</div>
-
 @push('JS')
     <script>
         $('document').ready(function() {
@@ -100,10 +107,7 @@
             $('#success-modal').modal('show');
         });
     </script>
-
-@endpush
-@push('JS')
-    <script src="{{ url('vendors/scripts/core.js')  }}"></script>
+    <script src="{{ url('vendors/scripts/core.js') }}"></script>
     <script src="{{ url('vendors/scripts/script.min.js') }}"></script>
     <script src="{{ url('vendors/scripts/process.js') }}"></script>
     <script src="{{ url('vendors/scripts/layout-settings.js') }}"></script>

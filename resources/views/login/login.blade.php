@@ -245,31 +245,33 @@
                                 {{ $message }}
                             </div>
                     </div>
-
                     @enderror
-                    @if (session('loginError'))
-                    <div class="text-center alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="icon-copy fa fa-warning" aria-hidden="true"></i>
-                        <br>
-                        {{ session('loginError') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    @endif
+                 
                     <div class="row pb-30 row-texts">
                         <div class="col-md-6">
-                            <input type="checkbox" class="px-5 input-checkbox">
-                            <label name="remember" class="pl-2 texts-rows" for="customCheck1">Mantenerme
-                                conectado</label>
+                            <input type="checkbox" name="remember" class="px-5 input-checkbox">
+                            <label name="remember" class="pl-2 texts-rows" for="customCheck1">Mantenerme conectado</label>
                         </div>
                         <div class="col-md-6">
                             <a href="{{ url('forgotPassword') }}" class="texts-rows">¿Olvido su contraseña?</a>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col-md-12">
+                            @if (session('loginError'))
+                            <div class="text-center alert alert-danger alert-dismissible fade show" role="alert">
+                                <i class="icon-copy fa fa-warning" aria-hidden="true"></i>
+                                <br>
+                                {{ session('loginError') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <audio autoplay>
+                                    <source src="{{asset('sounds/error.ogg')}}">
+                                    Tu navegador no soporta el audio.
+                                </audio>
+                            </div>
+                            @endif
                             <button class="btn button-color btn-block btn-lg" type="submit">Iniciar
                                 sesión</button>
                         </div>

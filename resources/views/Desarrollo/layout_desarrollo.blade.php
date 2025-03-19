@@ -12,7 +12,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('vendors/images/favicon-16x16.png') }}">
 
     <!-- Mobile Specific Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, ma  ximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Google Font -->
     <link
@@ -40,9 +40,12 @@
         .sidebar-menu .dropdown-toggle:hover,
         .sidebar-menu .show>.dropdown-toggle {
             background: none !important;
-
         }
 
+        .sidebar-menu
+        {
+            padding-top: 1rem !important; 
+        }
 
         .sidebar-menu .dropdown-toggle:hover .micon ,
         .sidebar-menu .show>.dropdown-toggle .micon {
@@ -103,7 +106,6 @@
         .left-side-bar {
             width: 255px !important;
             background: #ffff;
-            margin-left: 28px;
             border-radius: 9px !important;
         }
 
@@ -120,8 +122,7 @@
         }
 
         .page-header {
-            background: url('{{ asset('vendors/images/page-header.jpg') }}');
-            padding: 20px;
+            background-image: url('{{ asset("vendors/images/page-header.webp") }}');
             background-size: cover !important;
             background-position: center top !important;
             background-repeat: no-repeat !important;
@@ -129,6 +130,11 @@
             margin-bottom: 20px;
         }
 
+        .page-header ol 
+        {
+            display: flex !important;
+            align-items: center !important;
+        }
 
         .mCustomScrollBox {
             background-color: #ffff;
@@ -335,7 +341,7 @@
             </div>
         </div> --}}
         <div class="menu-block customscroll">
-            <img src="{{ url(asset('vendores/vendors/logo_himalaya.jpg')) }}" alt="">
+            <img src="{{ url(asset('vendors/images/logo_azul.png')) }}" class="mx-auto d-block py-3" alt="">
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
                     <li class="dropdown">
@@ -350,7 +356,7 @@
                         </a>
                     </li>
                     <li class="dropdown">
-                        <a href="{{ url('superadmin/proyectos') }}" class="dropdown-toggle no-arrow">
+                        <a href="{{ url('superadmin/Clientes') }}" class="dropdown-toggle no-arrow">
                             <span class="micon icon-proyectos"></span>
                             Clientes</span>
                         </a>
@@ -389,7 +395,7 @@
                         <div class="col-md-6 col-sm-12">
                             <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
-                                    <span class="icon-home"></span>
+                                    <span class="icon-home pr-1"></span>
                                     <li><a href="index.html"><span>Home / {{ $nameRoute }} </a></li>
                                 </ol>
                             </nav>
@@ -415,6 +421,8 @@
     <!-- js -->
     <script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
     <script src="{{ asset('vendors/scripts/process.js') }}"></script>
+	<script src="{{ asset('vendors/scripts/datatable-setting.js')}}"></script></body>
+
     @stack('JS')
 </body>
 

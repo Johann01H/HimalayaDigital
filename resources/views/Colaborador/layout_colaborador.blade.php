@@ -13,10 +13,7 @@
 
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, ma  ximum-scale=1">
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="superadmin/vendors/styles/core.css">
     <link rel="stylesheet" type="text/css" href="superadmin/vendors/styles/icon-font.min.css">
@@ -35,12 +32,63 @@
 
         gtag('config', 'UA-119386393-1');
     </script> --}}
-
     <style>
+        body {
+
+            background-color: #003B7B;
+            font-family: "Red Hat Display" !important;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        .sidebar-menu .dropdown-toggle:hover,
+        .sidebar-menu .show>.dropdown-toggle {
+            background: none !important;
+
+        }
+
+
+        .sidebar-menu .dropdown-toggle:hover .micon ,
+        .sidebar-menu .show>.dropdown-toggle .micon {
+            background-color: #25AFDB !important;
+            /* Color azul para el fondo */
+            color: white !important;
+            /* Color blanco para el icono */
+            border-radius: 50% !important;
+            /* Forma redonda */
+            padding: 5px !important;
+            /* Espacio alrededor del icono */
+            transition: all 0.3s ease !important;
+            /* Animación suave */
+        }
+
+        .sidebar-menu .dropdown-toggle:hover::after,
+        .sidebar-menu .show>.dropdown-toggle::after {
+            content: '' !important;
+            display: block !important;
+            width: 29% !important;
+            height: 3px !important;
+            background-color: #e60000 !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 63px !important;
+        }
+
+        a {
+            color: #003B7B !important;
+            font-family: "Red Hat Display" !important;
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 500 !important;
+            /* 42px */
+        }
+
         .btn-primary {
-            background-color: #002E60 !important;
-            border-color: #002E60 !important;
-            border: solid 1px #002E60;
+            background-color: #00BDF8 !important;
+            border-color: #00BDF8 !important;
+            border: solid 1px #00BDF8;
         }
 
         .btn-primary:hover {
@@ -48,12 +96,9 @@
             border-color: #204d74 !important;
         }
 
-        .menu-block {
-            background-color: #002E60
-        }
 
         .brand-logo {
-            background-color: #003A81;
+            background-color: #ffff;
             margin-bottom: 20px;
         }
 
@@ -62,28 +107,35 @@
         }
 
         .left-side-bar {
-            background: #002E60;
+            width: 255px !important;
+            background: #ffff;
+            border-radius: 9px !important;
         }
+
 
         .header {
-            background-color: #004EA4;
+            background-color: transparent;
+            box-shadow: none;
+
         }
 
-        .btn-secondary{
+        .btn-secondary {
             background-color: #004EA4;
-        }
-        .page-header{
-            background-color: #004EA4;
+            border-color: #004EA4;
         }
 
-        .breadcrumb-item a {
-            color: #fff;
-          }
+        .page-header {
+            background-image: url('{{ asset("vendors/images/page-header.webp") }}');
+            background-size: cover !important;
+            background-position: center top !important;
+            background-repeat: no-repeat !important;
+            height: 120px;
+            margin-bottom: 20px;
+        }
 
-          .breadcrumb-item::before{
-            color: #fff !important;
-
-          }
+        .mCustomScrollBox {
+            background-color: #ffff;
+        }
     </style>
 
 </head>
@@ -104,7 +156,7 @@
 
     <div class="header">
         <div class="header-left">
-            <div class="menu-icon dw dw-menu" style="color:#fff"></div>
+            <div class="menu-icon dw dw-menu" ></div>
             <div class="search-toggle-icon dw dw-search2" data-toggle="header_search" style="color: #fff"></div>
             <div class="header-search">
                 <form>
@@ -147,7 +199,7 @@
             <div class="user-notification">
                 <div class="dropdown">
                     <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
-                        <i class="icon-copy dw dw-notification" style="color: #fff"></i>
+                        <i class="icon-copy dw dw-notification"></i>
                         <span class="badge notification-active"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -345,12 +397,12 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div class="title">
-                                <h4 class="text-white">{{ $nameRoute }}</h4>
+                                <h4>{{ $nameRoute }}</h4>
                             </div>
                             <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="text-white breadcrumb-item active" aria-current="page">{{ $nameRoute }}</li>
+                                    <li class= breadcrumb-item active" aria-current="page">{{ $nameRoute }}</li>
                                 </ol>
                             </nav>
                         </div>
@@ -364,7 +416,7 @@
                     @yield('template-blank-development')
                 </div>
             </div>
-            <div class="mb-20 footer-wrap pd-20 card-box" style="background-color: #002E60; color: #fff">
+            <div class="mb-20 footer-wrap pd-20 card-box">
                 Copyright © 2017 Himalaya Digital Agency. Todos los derechos reservados.
             </div>
         </div>

@@ -37,10 +37,62 @@
     </script> --}}
 
     <style>
+        body {
+
+            background-color: #003B7B;
+            font-family: "Red Hat Display" !important;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        .sidebar-menu .dropdown-toggle:hover,
+        .sidebar-menu .show>.dropdown-toggle {
+            background: none !important;
+
+        }
+
+
+        .sidebar-menu .dropdown-toggle:hover .micon ,
+        .sidebar-menu .show>.dropdown-toggle .micon {
+            background-color: #25AFDB !important;
+            /* Color azul para el fondo */
+            color: white !important;
+            /* Color blanco para el icono */
+            border-radius: 50% !important;
+            /* Forma redonda */
+            padding: 5px !important;
+            /* Espacio alrededor del icono */
+            transition: all 0.3s ease !important;
+            /* Animación suave */
+        }
+
+        .sidebar-menu .dropdown-toggle:hover::after,
+        .sidebar-menu .show>.dropdown-toggle::after {
+            content: '' !important;
+            display: block !important;
+            width: 29% !important;
+            height: 3px !important;
+            background-color: #e60000 !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 63px !important;
+        }
+
+        a {
+            color: #003B7B !important;
+            font-family: "Red Hat Display" !important;
+            font-size: 14px !important;
+            font-style: normal;
+            font-weight: 500 !important;
+            /* 42px */
+        }
+
         .btn-primary {
-            background-color: #002E60 !important;
-            border-color: #002E60 !important;
-            border: solid 1px #002E60;
+            background-color: #00BDF8 !important;
+            border-color: #00BDF8 !important;
+            border: solid 1px #00BDF8;
         }
 
         .btn-primary:hover {
@@ -48,12 +100,9 @@
             border-color: #204d74 !important;
         }
 
-        .menu-block {
-            background-color: #002E60
-        }
 
         .brand-logo {
-            background-color: #003A81;
+            background-color: #ffff;
             margin-bottom: 20px;
         }
 
@@ -62,28 +111,35 @@
         }
 
         .left-side-bar {
-            background: #002E60;
+            width: 255px !important;
+            background: #ffff;
+            border-radius: 9px !important;
         }
+
 
         .header {
-            background-color: #004EA4;
+            background-color: transparent;
+            box-shadow: none;
+
         }
 
-        .btn-secondary{
+        .btn-secondary {
             background-color: #004EA4;
-        }
-        .page-header{
-            background-color: #004EA4;
+            border-color: #004EA4;
         }
 
-        .breadcrumb-item a {
-            color: #fff;
-          }
+        .page-header {
+            background-image: url('{{ asset("vendors/images/page-header.webp") }}');
+            background-size: cover !important;
+            background-position: center top !important;
+            background-repeat: no-repeat !important;
+            height: 120px;
+            margin-bottom: 20px;
+        }
 
-          .breadcrumb-item::before{
-            color: #fff !important;
-
-          }
+        .mCustomScrollBox {
+            background-color: #ffff;
+        }
     </style>
 
 </head>

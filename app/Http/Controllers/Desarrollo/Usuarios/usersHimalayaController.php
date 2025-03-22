@@ -14,16 +14,35 @@ class usersHimalayaController
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index(Request $request)
+    {   
+        $users = User::with('areas:id,nombre')
+        ->select(['nombre', 'apellido', 'cargo', 'areas_id'])
+        ->paginate(8);
+
         $nameRoute = Route::currentRouteName();
-        return view('Desarrollo.Equipo.usuarios', compact('nameRoute', ));
+        
+        return view('Desarrollo.Equipo.usuarios', compact('nameRoute','users' ));
     }
 
-    public function apiUser()
-    {
-        $usuarios = User::with('areas','roles')->get();
-        return response()->json(["data" => $usuarios]);
+
+    public function apiUser(Request $request)
+    {   
+        $query = $request->input('searchName');
+
+        if(strlen($query) >= 1)
+        {
+            $queryName = User::where('nombre','LIKE',"%{$query}%")
+            ->orWhere('apellido','LIKE',"%{$query}%");
+            
+            return response()->json(
+                ['success' => true,
+                    'users' => $queryName ]);
+        }else{
+            return response()->json(['success' => false,
+            'message' => 'Se requiere al menos 1 carácter para buscar'
+        ]);
+        }
     }
     /**
      * Show the form for creating a new resource.

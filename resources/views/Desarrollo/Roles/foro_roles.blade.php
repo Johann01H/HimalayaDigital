@@ -6,10 +6,14 @@
             .btn-secondary {
                 background-color: #15baee !important;
                 border-color: #15baee !important;
+                color: white !important;
+                font-weight: bolder !important; 
+
             }
 
             .btn-secondary:hover {
-                background-color: #15baee !important;
+                background-color: #004EA4 !important;
+                border-color: #004EA4 !important;
             }
 
             .color-header-table {
@@ -35,9 +39,7 @@
     @endpush
 
 @section('button-press')
-    <a href="{{ url('superadmin/createRoles') }}" class="btn btn-secondary"><i class="icon-copy fa fa-plus"
-            aria-hidden="true"></i>
-        Establecer un rol</a>
+    <a href="{{ url('superadmin/createRoles') }}" class="btn btn-secondary">Establecer un rol</a>
 @endsection
 
 {{-- ELIMINAR ROLES -> DIRECTOR EJECUTIVO, CUENTAS, CLIENTES --}}

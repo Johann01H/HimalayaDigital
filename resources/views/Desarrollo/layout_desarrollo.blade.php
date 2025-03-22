@@ -350,29 +350,10 @@
                         </a>
                     </li>
                     <li class="dropdown">
-                        <a href="{{ url('superadmin/forumRole') }}" class="dropdown-toggle no-arrow">
-                            <span class="micon icon-crear-roles"></span></span>
-                            <span class="mtext ">Crear roles</span>
-                        </a>
-                    </li>
-                    <li class="dropdown">
                         <a href="{{ url('superadmin/Clientes') }}" class="dropdown-toggle no-arrow">
                             <span class="micon icon-proyectos"></span>
                             Clientes</span>
                         </a>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" id="dropdownForo">
-                            <span class="micon icon-foro"></span><span>Foro</span>
-                        </a>
-                        <ul class="submenu" id="submenuForo">
-                            <li><a href="{{ url('superadmin/forumDesign') }}">Diseño</a></li>
-                            <li><a href="{{ url('superadmin/forumDevelopment') }}">Desarrollo</a></li>
-                            <li><a href="{{ url('superadmin/forumContent') }}">Contenido</a></li>
-                            <li><a href="{{ url('superadmin/forumDigitalPerformance') }}">Digital performance</a></li>
-                            <li><a href="{{ url('superadmin/forumAccount') }}">Cuentas</a></li>
-                            <li><a href="{{ url('superadmin/forumCreateHomework') }}">Cr@eación de tareas</a></li>
-                        </ul>
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle">
@@ -381,6 +362,12 @@
                         <ul class="submenu">
                             <li><a href="{{ url('superadmin/usuariosEquipo') }}">Usuarios</a></li>
                         </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="{{ url('superadmin/forumRole') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon icon-crear-roles"></span></span>
+                            <span class="mtext ">Crear roles</span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -419,9 +406,6 @@
         </div>
     </div>
     <!-- js -->
-    <script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
-    <script src="{{ asset('vendors/scripts/process.js') }}"></script>
-	<script src="{{ asset('vendors/scripts/datatable-setting.js')}}"></script></body>
 
     @stack('JS')
 </body>

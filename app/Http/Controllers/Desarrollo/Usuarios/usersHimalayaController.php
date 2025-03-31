@@ -15,34 +15,44 @@ class usersHimalayaController
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {   
-        $users = User::with('areas:id,nombre')
-        ->select(['nombre', 'apellido', 'cargo', 'areas_id'])
-        ->paginate(8);
-
+    {
+        // Método para traer el nombre de la ruta
         $nameRoute = Route::currentRouteName();
-        
-        return view('Desarrollo.Equipo.usuarios', compact('nameRoute','users' ));
-    }
 
+        // Obtener áreas para el selector
+        $areas = Area::select('id', 'nombre')->get(); // Cambiado de User a Area
 
-    public function apiUser(Request $request)
-    {   
-        $query = $request->input('searchName');
+        // Método para mostrar los usuarios y areas
+        $inputQuery = $request->input('searchName');
+        $inputQueryArea = $request->input('searchArea');
 
-        if(strlen($query) >= 1)
-        {
-            $queryName = User::where('nombre','LIKE',"%{$query}%")
-            ->orWhere('apellido','LIKE',"%{$query}%");
-            
-            return response()->json(
-                ['success' => true,
-                    'users' => $queryName ]);
-        }else{
-            return response()->json(['success' => false,
-            'message' => 'Se requiere al menos 1 carácter para buscar'
-        ]);
+        // Consulta base de usuarios
+        $query = User::with('areas:id,nombre');
+
+        // Filtrar por nombre si está presente
+        if ($inputQuery) {
+            $query->where(function ($q) use ($inputQuery) {
+                $q->where('nombre', 'LIKE', "%{$inputQuery}%")
+                    ->orWhere('apellido', 'LIKE', "%{$inputQuery}%");
+            });
         }
+
+        // Filtrar por área si está presente
+        if ($inputQueryArea) {
+            $query->where('areas_id', $inputQueryArea);
+        }
+
+        // Paginar resultados
+        $requestName = $query->select(['id','nombre', 'apellido', 'cargo', 'areas_id'])
+            ->paginate(8);
+
+        return view('Desarrollo.Equipo.usuarios', [
+            'nameRoute' => $nameRoute,
+            'search' => $inputQuery,
+            'query' => $requestName,
+            'inputArea' => $inputQueryArea,
+            'areas' => $areas
+        ]);
     }
     /**
      * Show the form for creating a new resource.
@@ -153,11 +163,10 @@ class usersHimalayaController
     public function profilesDirectories(Request $request)
     {
 
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $search = $request->query('search');
-            $usuarios = User::where('nombre','LIKE',"%{$search}%")
-            ->orWhere('email','LIKE',"%{$search}%");
+            $usuarios = User::where('nombre', 'LIKE', "%{$search}%")
+                ->orWhere('email', 'LIKE', "%{$search}%");
 
             return response()->json([
                 'html' => view('Desarrollo.Equipo.directorio', compact('usuarios'))->render()
@@ -166,9 +175,9 @@ class usersHimalayaController
         }
 
         $areasFilter = $request->input('areasFilter');
-        if($areasFilter){
+        if ($areasFilter) {
             $queryFilter = User::where('areas_id', $areasFilter)->get();
-        }else{
+        } else {
             $queryFilter = User::all();
         }
 
@@ -176,7 +185,7 @@ class usersHimalayaController
         $areas = Area::all();
         $nameRoute = Route::currentRouteName();
 
-        return view('Desarrollo.Equipo.directorio', compact('nameRoute','usuarios','areas','queryFilter'));
+        return view('Desarrollo.Equipo.directorio', compact('nameRoute', 'usuarios', 'areas', 'queryFilter'));
     }
 
 
@@ -184,11 +193,11 @@ class usersHimalayaController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        $profile = User::findOrFail();
+        $profile = User::findOrFail($id);
         $nameRoute = Route::currentRouteName();
-        return view('Home.profileDesarrollo',compact('nameRoute','profile'));
+        return view('Desarrollo.Home.profileDesarrollo', compact('nameRoute', 'profile'));
 
     }
 
@@ -265,10 +274,10 @@ class usersHimalayaController
             'tfu-user' => 'required|string|max:255',
             'tfru-user' => 'required|string|max:255',
             'hru-user' => [
-                'required',
-                'numeric',
-                'regex:/^\d{1,13}(\.\d{1,2})?$/',
-            ],
+                    'required',
+                    'numeric',
+                    'regex:/^\d{1,13}(\.\d{1,2})?$/',
+                ],
             'fhu-user' => 'required|date',
             'rlu-user' => 'required|exists:roles,id|string',
             'aru-user' => 'required|exists:areas,id|string',

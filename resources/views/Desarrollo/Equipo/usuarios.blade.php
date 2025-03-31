@@ -77,7 +77,8 @@
                         <div class="text-center mb-30">
                             <img src="{{ asset('vendors/images/success.png') }}" alt="Éxito">
                         </div>
-                        <p class="text-center">El usuario se ha creado exitosamente en el sistema. Ahora puedes
+                        <p class="text-center">
+                            El usuario se ha creado exitosamente en el sistema. Ahora puedes
                             asignarle un rol o gestionarlo desde el módulo de configuración. ¡Gracias por usar nuestra
                             plataforma!
                         <p>
@@ -121,142 +122,76 @@
 @endif
 
 {{-- star inputs group --}}
-<div class="row justify-content-between pb-4">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label>Nombre: </label>
-            <input type="search" id="searchName" class="searchName" class="form-control">
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="user-filter">Areas:</label>
-            <select class="form-control" name="" id="">
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select>
-        </div>
-    </div>
-</div>
-<div class="row" id="alterUser">
-    @foreach ($users as $user)
-        <div class="col-md-3 pb-5">
-            <div class="contact-directory-box">
-                <div class="contact-dire-info text-center">
-                    <div class="contact-avatar">
-                        <span>
-                            <img src="{{ asset('vendors/images/photo9.jpg') }}" alt="">
-                        </span>
-                    </div>
-                    <div class="contact-name">
-                        <h4>{{ $user->nombre }}</h4>
-                        <div class="work text-success"><i class="ion-android-person"></i> {{ $user->cargo }}</div>
-                    </div>
-                    <div class="contact-skill">
-                        <span class="badge badge-pill">{{ $user->areas->nombre }}</span>
-                    </div>
-                </div>
-                <div class="view-contact">
-                    <a href="#">View Profile</a>
-                </div>
+<form action="{{ route('Usuarios') }}" method="GET">
+    <div class="row justify-content-between pb-4">
+        <div class="col-md-4">
+            <label for="">Nombre: </label>
+            <div class="input-group ">
+                <input type="search" name="searchName" class="form-control px-2" value="{{ $search ?? '' }}">
             </div>
         </div>
-    @endforeach
-    
-</div>
-<div class="d-flex justify-content-between align-items-center text-white">
-    <div>
-        Mostrando {{ $users->firstItem() }} a {{ $users->lastItem() }} de {{ $users->total() }} resultados
+        <div class="col-md-4">
+            <div class="form-group ">
+                <label for="user-filter">Areas:</label>
+                <select class="form-control" name="searchArea">
+                    <option value="" {{ !request('searchArea') ? 'selected' : '' }}>Seleccione...</option>
+                    @foreach ($areas as $area)
+                        <option value="{{ $area->id }}" {{ request('searchArea') == $area->id ? 'selected' : '' }}>
+                            {{ $area->nombre }}
+                        </option>
+                    @endforeach
+                </select>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+                <a href="{{ route('Usuarios') }}" class="btn btn-secondary">Limpiar</a>
+            </div>
+        </div>
     </div>
-    <div>
-        {{ $users->links() }}
+</form>
+
+@if ($query->count() > 0)
+    <div class="row" id="alterUser">
+        @foreach ($query as $qr)
+            <div class="col-md-3 pb-5">
+                <div class="contact-directory-box">
+                    <div class="contact-dire-info text-center">
+                        <div class="contact-avatar">
+                            <span>
+                                <img src="{{ asset('vendors/images/photo9.jpg') }}" alt="">
+                            </span>
+                        </div>
+                        <div class="contact-name">
+                            <h4>{{ $qr->nombre }} {{ $qr->apellido }}</h4>
+                            <div class="work text-success"><i class="ion-android-person"></i> {{ $qr->cargo }}</div>
+                        </div>
+                        <div class="contact-skill">
+                            <span class="badge badge-pill">{{ $qr->areas->nombre }}</span>
+                        </div>
+                    </div>
+                    <div class="view-contact">
+                        @if ($qr && $qr->id)
+                            <a href="{{ route('Perfil de usuario', ['id' => $qr->id]) }}">Ver Perfil</a>
+                        @else
+                            <span>Perfil no disponible</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
-</div>
-
-{{-- end inputs groups --}}
-
-
-
-
-
+    <div class="d-flex justify-content-between align-items-center text-white" id="pagination-container">
+        <div>
+            Mostrando {{ $query->firstItem() }} a {{ $query->lastItem() }} de {{ $query->total() }} resultados
+        </div>
+        <div>
+            {{ $query->links() }}
+        </div>
+    </div>
+@elseif($search || $inputArea )
+    <div class="alert alert-warning text-center">
+        No se encontraron usuarios con el término "{{ $search }}"
+    </div>
+@endif
 @push('JS')
-<script>
-    $(document).ready(function(){
-        let timeout = null;
-        const searchInput = $('#searchName');
-        const userContainer = $('#alterUser');
-        
-    })
-</script>
-    {{-- <div class="pb-20">
-    <table class="table table-striped data-table-usuario hover wrapper">
-        <thead>
-            <tr class="color-header-table">
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Email</th>
-                <th>Cargo</th>
-                <th>Teléfono</th>
-                <th>Referencia</th>
-                <th>Rol</th>
-                <th>Area</th>
-                <th>Estado</th>
-                <th>Edicion</th>
-            </tr>
-        </thead>
-    </table>
-</div> --}}
-
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
-
-    <!-- Cargar dependencias base primero -->
-    {{-- <script src="{{ asset('vendors/scripts/core.js') }}"></script>
-<script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
-<script src="{{ asset('vendors/scripts/process.js') }}"></script>
-
-<!-- Luego cargar plugins de DataTables -->
-<script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script> --}}
-
-    {{-- <script>
-    $(document).ready(function(){
-        $('.data-table-usuario').DataTable({
-            ajax: {
-                url: "{{ route('api.user') }}",
-                error: function(xhr, error, thrown) {
-                    console.error('Error al cargar datos:', error);
-                    alert('Error al cargar los datos de usuarios. Por favor, recargue la página o contacte al administrador.');
-                }
-            },
-            columns: [
-                { data: 'nombre' },
-                { data: 'apellido' },
-                { data: 'email' },
-                { data: 'cargo' },
-                { data: 'telefono' },
-                { data: 'numero_referencia' },
-                { data: 'roles.nombre', defaultContent: 'Sin rol' },
-                { data: 'areas.nombre', defaultContent: 'Sin área' },
-                { data: 'estado', render: function(data) {
-                        return data
-                            ? '<span class="badge badge-success rounded-pill"> Activo </span>'
-                            : '<span class="badge badge-danger rounded-pill"> Inactivo </span>';
-                    }
-                },
-                { data: 'id', render: function(data){
-                    return `<a href="/editUser/${data}" class="text-white btn btn-primary col-12 rounded-pill"><i class="dw dw-edit2"></i></a>`;
-                }}
-            ],
-            responsive: true,
-            language: {
-                url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
-            }
-        });
-    });
-</script> --}}
-
     <script>
         $(document).ready(function() {
             @if (session('updateSuccess'))
@@ -264,7 +199,6 @@
             @endif
         });
     </script>
-
     <script>
         $(document).ready(function() {
             @if (session('success'))

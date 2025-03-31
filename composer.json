@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.2",
         "jenssegers/date": "^2.0",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^11.44",
         "laravel/tinker": "^2.9",
         "mitchbred/entrust": "^2.5",
         "phpoffice/phpspreadsheet": "^3.9",

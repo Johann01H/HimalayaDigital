@@ -108,13 +108,11 @@ Route::middleware(['auth', DisableCache::class, RememberMe::class])->prefix('sup
         Route::controller(usersHimalayaController::class)->group(function(){
 
             Route::get('/usuariosEquipo','index')->name('Usuarios');
-            Route::get('/apiUser','apiUser')->name('api.user');
             Route::get('/createUser','create')->name('Registrar nuevo usuario');
             Route::get('/editUser/{id}','edit')->name('Actualizar detalles del usuario');
             Route::post('/store.create.user','store')->name('store.crete.user');
             Route::put('/updateUser/{id}')->name('edit.update.user');
-            Route::put('/profileDirectory/{id}','show')->name('Perfil de usuario');
-            Route::get('/directorioEquipo','profilesDirectories')->name('Directorio');
+            Route::get('/profileDirectory/{id}','show')->name('Perfil de usuario');
 
         });
 

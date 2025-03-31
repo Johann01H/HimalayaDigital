@@ -17,8 +17,28 @@
                 
             }
 
+            .btn-primary{
+                background-color: #15baee !important;
+                border-color: #15baee !important;
+                color: #ffff !important;
+                font-weight: bolder !important;
+            }
+
+            .btn-primary:hover
+            {
+                background-color: #004EA4 !important;
+                color:#ffff !important;
+                border-color:#004EA4 !important: 
+                font-weight: bolder !important;
+
+            }
+
         </style>
     @endpush
+
+    @section('button-press')
+        <a class="btn btn-primary" href="{{ route('Usuarios') }}"> Interfaz de usuarios</a>
+    @endsection
 
     <div class="row">
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
@@ -36,7 +56,7 @@
                                             @method('PUT')
                                             <img id="image" src="
                                             {{ 
-                                                asset($userAuthenticate->img_perfil ? 'storage/images/' . $userAuthenticate->img_perfil : 'vendors/images/default.png')  }}" 
+                                                asset($profile->img_perfil ? 'storage/images/' . $profile->img_perfil : 'vendors/images/default.png')  }}" 
                                                 alt="Picture" 
                                                 enctype="multipart/form-data"
 
@@ -53,54 +73,39 @@
                         </div>
                     </div>
                 </div>
-                <h5 class="mb-0 text-center h5">{{ $userAuthenticate->nombre }} {{ $userAuthenticate->apellido }}</h5>
-                <p class="text-center text-muted font-14">{{ $userAuthenticate->cargo }}</p>
+                <h5 class="mb-0 text-center h5">{{ $profile->nombre }} {{ $profile->apellido }}</h5>
+                <p class="text-center text-muted font-14">{{ $profile->cargo }}</p>
                 <div class="profile-info">
                     <h5 class="mb-20 h5 text-blue">Información de contacto</h5>
                     <ul>
                         <li>
                             <span>Dirección de correo electrónico:</span>
-                            {{ $userAuthenticate->email ?? '¡No es posible encontrar un correo electronico!' }}
+                            {{ $profile->email ?? '¡No es posible encontrar un correo electronico!' }}
                         </li>
                         <li>
                             <span>Número de teléfono:</span>
-                            {{ $userAuthenticate->telefono ?? '¡Agrega un número de telefono!' }}
+                            {{ $profile->telefono ?? '¡Agrega un número de telefono!' }}
                         </li>
                         <li>
                             <span>Fecha de nacimiento:</span>
-                            {{ $userAuthenticate->fecha_nacimiento ?? '¡No es posible encontrar un correo electronico!' }}
+                            {{ $profile->fecha_nacimiento ?? '¡No es posible encontrar un correo electronico!' }}
                         </li>
                         <li>
                             <span>Número de referencia:</span>
-                            {{ $userAuthenticate->numero_referencia  }}
+                            {{ $profile->numero_referencia  }}
                         </li>
                         <li>
                             <span>Dirección:</span>
-                            {{ $userAuthenticate->direccion ?? '¡Agrega tu dirección!' }}
+                            {{ $profile->direccion ?? '¡Agrega tu dirección!' }}
                         </li>
                         <li>
                             <span>Rol:</span>
-                            {{ $userAuthenticate->role_name ?? '¡No es posible encontrar el rol especificado!.' }}
+                            {{ $profile->roles->nombre ?? '¡No es posible encontrar el rol especificado!.' }}
                         </li>
                         <li>
                             <span>Area asignada:</span>
-                            {{ $userAuthenticate->area_name ?? '¡No es posible encontrar el area asignada!.' }}
+                            {{ $profile->areas->nombre ?? '¡No es posible encontrar el area asignada!.' }}
                         </li>
-                    </ul>
-                </div>
-                <div class="profile-social">
-                    <h5 class="mb-20 h5 text-blue">Enlaces sociales</h5>
-                    <ul class="clearfix">
-                        <li><a href="#" class="btn" data-bgcolor="#3b5998" data-color="#ffffff"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#" class="btn" data-bgcolor="#1da1f2" data-color="#ffffff"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#" class="btn" data-bgcolor="#007bb5" data-color="#ffffff"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#" class="btn" data-bgcolor="#f46f30" data-color="#ffffff"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="#" class="btn" data-bgcolor="#c32361" data-color="#ffffff"><i class="fa fa-dribbble"></i></a></li>
-                        <li><a href="#" class="btn" data-bgcolor="#3d464d" data-color="#ffffff"><i class="fa fa-dropbox"></i></a></li>
-                        <li><a href="#" class="btn" data-bgcolor="#db4437" data-color="#ffffff"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#" class="btn" data-bgcolor="#bd081c" data-color="#ffffff"><i class="fa fa-pinterest-p"></i></a></li>
-                        <li><a href="#" class="btn" data-bgcolor="#00aff0" data-color="#ffffff"><i class="fa fa-skype"></i></a></li>
-                        <li><a href="#" class="btn" data-bgcolor="#00b489" data-color="#ffffff"><i class="fa fa-vine"></i></a></li>
                     </ul>
                 </div>
                 <div class="profile-skills">
@@ -238,7 +243,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for=""><span class="text-danger" value={{ $userAuthenticate->nombre }}>*</span>Nombres: </label>
+                                                        <label for=""><span class="text-danger" value={{ $profile->nombre }}>*</span>Nombres: </label>
                                                         <input type="text" class="form-control">
                                                     </div>
                                                 </div>

@@ -19,11 +19,12 @@
         href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <!-- CSS -->
+
+
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/core.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icon-font.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/styles/icons-style.css') }}">
-
     @stack('CSS')
 
     <style>
@@ -44,7 +45,7 @@
 
         .sidebar-menu
         {
-            padding-top: 1rem !important; 
+            padding-top: 1rem !important;
         }
 
         .sidebar-menu .dropdown-toggle:hover .micon ,
@@ -130,7 +131,7 @@
             margin-bottom: 20px;
         }
 
-        .page-header ol 
+        .page-header ol
         {
             display: flex !important;
             align-items: center !important;
@@ -351,23 +352,26 @@
                     </li>
                     <li class="dropdown">
                         <a href="{{ url('superadmin/Clientes') }}" class="dropdown-toggle no-arrow">
-                            <span class="micon icon-proyectos"></span>
+                            <span class="micon icon-clientes"></span>
                             Clientes</span>
                         </a>
                     </li>
                     <li class="dropdown">
+                       <a href="{{ url('superadmin/usuariosEquipo') }}" class="no-arrow dropdown-toggle  "><span class="micon icon-equipo"></span>Usuarios</a>
+                    </li>
+                         <li class="dropdown">
                         <a class="dropdown-toggle">
-                            <span class="micon icon-equipo"></span><span>Mi equipo</span>
+                            <span class="micon icon-herramientas"></span><span>Herramientas</span>
                         </a>
                         <ul class="submenu">
-                            <li><a href="{{ url('superadmin/usuariosEquipo') }}">Usuarios</a></li>
+                            <li><a href="{{ url('superadmin/Areas') }}">Areas</a></li>
                         </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="{{ url('superadmin/forumRole') }}" class="dropdown-toggle no-arrow">
-                            <span class="micon icon-crear-roles"></span></span>
-                            <span class="mtext ">Crear roles</span>
-                        </a>
+                        <ul class="submenu">
+                            <li><a href="{{ url('superadmin/servicios') }}">Servicios</a></li>
+                        </ul>
+                        <ul class="submenu">
+                            <li><a href="{{ url('superadmin/roles') }}">Roles</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -408,6 +412,7 @@
     <!-- js -->
 
     @stack('JS')
+
 </body>
 
 </html>

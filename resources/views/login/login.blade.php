@@ -179,6 +179,7 @@
             max-width: 86% !important;
         }
 
+
     </style>
 
 </head>
@@ -191,6 +192,23 @@
             }
     </script>
     @endif
+
+    @if(session('messageEmail'))
+    <div class="modal fade" id="warning-modal-password" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content bg-warning">
+                <div class="modal-body text-center">
+                    <h3 class="mb-15"><i class="fa fa-exclamation-triangle"></i> Advertencia</h3>
+                    <p class="text-center text-black">
+                        {{ session('messageEmail') }}.
+                    </p>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
     <div class="row">
         <div class="col-md-4">
             <div class="modal fade" id="warning-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -246,7 +264,7 @@
                             </div>
                     </div>
                     @enderror
-                 
+
                     <div class="row pb-30 row-texts">
                         <div class="col-md-6">
                             <input type="checkbox" name="remember" class="px-5 input-checkbox">
@@ -286,23 +304,38 @@
     </div>
     </div>
     <!-- js -->
+
+
+    <!-- Primero asegúrate de cargar todas las librerías JS -->
+    <script src="{{ asset('vendors/scripts/core.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/process.js') }}"></script>
+    <script src="{{ asset('vendors/scripts/layout-settings.js') }}"></script>
+
+    <!-- Después agrega tus scripts personalizados -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Para el modal de advertencia principal
+            @if (session('showModal'))
+                $('#warning-modal').modal('show');
+            @endif
+
+            // Para el modal de contraseña
+            @if(session('messageEmail'))
+                $('#warning-modal-password').modal('show');
+            @endif
+
+            // Para las alertas de error
             var alertBox = document.getElementById('error-alert');
             if (alertBox) {
-                alertBox.classList.add('show'); // Aparece con animación
-
-                // Ocultar la alerta después de 2 segundos con animación
+                alertBox.classList.add('show');
                 setTimeout(function() {
                     alertBox.classList.remove('show');
-                }, 5000); // La alerta desaparece después de 2 segundos
+                }, 5000);
             }
         });
     </script>
-    <script src="vendors/scripts/core.js"></script>
-    <script src="vendors/scripts/script.min.js"></script>
-    <script src="vendors/scripts/process.js"></script>
-    <script src="vendors/scripts/layout-settings.js"></script>
+
 </body>
 
 </html>

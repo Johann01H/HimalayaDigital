@@ -2,267 +2,141 @@
 
 @section('template-blank-development')
     @push('CSS')
-    <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/datatables/css/dataTables.bootstrap4.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/datatables/css/responsive.bootstrap4.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('src/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
+        <style>
+            .btn-primary {
+                background-color: #15baee !important;
+                border-color: #15baee !important;
+                color: white !important;
+                font-weight: bolder !important;
+            }
+
+            .btn-primary:hover {
+                background-color: #004EA4 !important;
+                border-color: #004EA4 !important;
+            }
+        </style>
     @endpush
 
-    <div class="pb-20">
-        <table class="data-table table stripe hover nowrap">
-            <thead>
+    @section('button-press')
+        <a href="" class="btn btn-primary"> Crear cliente </a>
+
+
+    @endsection
+
+
+    <div class="table-responsive">
+        <table id="data-table-clientes" class="table stripe hover nowrap table-responsive">
+            <thead class="text-center">
                 <tr>
-                    <th class="table-plus datatable-nosort">Name</th>
-                    <th>Age</th>
-                    <th>Office</th>
-                    <th>Address</th>
-                    <th>Start Date</th>
-                    <th class="datatable-nosort">Action</th>
+                    <th class="table-plus datatable-nosort">Logo</th>
+                    <th>Nombre</th>
+                    <th>Web</th>
+                    <th>Email</th>
+                    <th>Mapa</th>
+                    <th>Contrato</th>
+                    <th>Ejecutivo asignado</th>
+                    <th>Estado</th>
+                    <th class="datatable-nosort">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td class="table-plus">Gloria F. Mead</td>
-                    <td>25</td>
-                    <td>Sagittarius</td>
-                    <td>2829 Trainer Avenue Peoria, IL 61602 </td>
-                    <td>29-03-2018</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-plus">Andrea J. Cagle</td>
-                    <td>30</td>
-                    <td>Gemini</td>
-                    <td>1280 Prospect Valley Road Long Beach, CA 90802 </td>
-                    <td>29-03-2018</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-plus">Andrea J. Cagle</td>
-                    <td>20</td>
-                    <td>Gemini</td>
-                    <td>2829 Trainer Avenue Peoria, IL 61602 </td>
-                    <td>29-03-2018</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-plus">Andrea J. Cagle</td>
-                    <td>30</td>
-                    <td>Sagittarius</td>
-                    <td>1280 Prospect Valley Road Long Beach, CA 90802 </td>
-                    <td>29-03-2018</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-plus">Andrea J. Cagle</td>
-                    <td>25</td>
-                    <td>Gemini</td>
-                    <td>2829 Trainer Avenue Peoria, IL 61602 </td>
-                    <td>29-03-2018</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-plus">Andrea J. Cagle</td>
-                    <td>20</td>
-                    <td>Sagittarius</td>
-                    <td>1280 Prospect Valley Road Long Beach, CA 90802 </td>
-                    <td>29-03-2018</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-plus">Andrea J. Cagle</td>
-                    <td>18</td>
-                    <td>Gemini</td>
-                    <td>1280 Prospect Valley Road Long Beach, CA 90802 </td>
-                    <td>29-03-2018</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-plus">Andrea J. Cagle</td>
-                    <td>30</td>
-                    <td>Sagittarius</td>
-                    <td>1280 Prospect Valley Road Long Beach, CA 90802 </td>
-                    <td>29-03-2018</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-plus">Andrea J. Cagle</td>
-                    <td>30</td>
-                    <td>Sagittarius</td>
-                    <td>1280 Prospect Valley Road Long Beach, CA 90802 </td>
-                    <td>29-03-2018</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-plus">Andrea J. Cagle</td>
-                    <td>30</td>
-                    <td>Gemini</td>
-                    <td>1280 Prospect Valley Road Long Beach, CA 90802 </td>
-                    <td>29-03-2018</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-plus">Andrea J. Cagle</td>
-                    <td>30</td>
-                    <td>Gemini</td>
-                    <td>1280 Prospect Valley Road Long Beach, CA 90802 </td>
-                    <td>29-03-2018</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-plus">Andrea J. Cagle</td>
-                    <td>30</td>
-                    <td>Gemini</td>
-                    <td>1280 Prospect Valley Road Long Beach, CA 90802 </td>
-                    <td>29-03-2018</td>
-                    <td>
-                        <div class="dropdown">
-                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                role="button" data-toggle="dropdown">
-                                <i class="dw dw-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+            <tbody class="text-center">
+                <!-- DataTables llenará esto -->
             </tbody>
         </table>
 
+
         @push('JS')
-        <script src="{{ asset('vendors/scripts/datatable-setting.js')}}"></script></body>
+            <script src="{{ asset('vendors/scripts/core.js') }}"></script>
+            <script src="{{ asset('vendors/scripts/script.min.js') }}"></script>
+            <script src="{{ asset('src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
+            <script src="{{ asset('src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+            <script src="{{ asset('src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
+            <script src="{{ asset('src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#data-table-clientes').DataTable({
+                        ajax: {
+                            url: '{{ route('api.clientes') }}',
+                            type: 'GET'
+                        },
+                        columns:  [
+                            {
+                                data: 'logo',
+                                render: function(data) {
+                                    return data ??
+                                        '<img src="{{ asset('vendors/images/photo4.jpg') }}" class="rounded-circle" alt="logo_cliente" >'
+                                }
+                            },
+                            {
+                                data: 'nombre'
+                            },
+                            {
+                                data: 'sitio_web',
+                                render: function(data, type, row) {
+                                    return `<a href="${data}" target="_blank" class="btn btn-primary">Web ${row.nombre}</a>`;
+                                }
+                            },
+                            {
+                                data: 'email',
+                                render: function(data) {
+                                    return data ?? "Correo sin asignar."
+                                }
+
+                            },
+
+                            {
+                                data: 'mapa_cliente',
+                                render: function(data){
+                                    return data ?? "Mapa sin agregar."
+                                }
+                            },
+
+                            {
+                                data: 'contrato',
+                                render: function(data, type, row) {
+                                    if (data && Array.isArray(data) && data.length > 0) {
+                                        return data.map(contrato => contrato.nombre).join(', ');
+                                    } else {
+                                        return 'Sin contrato.';
+                                    }
+                                }
+                            },
+                            {
+                                data: 'usuario',
+                                render: function(data, type, row) {
+                                    if (data && Array.isArray(data) && data.length > 0) {
+                                        return data.map(usuario => usuario.nombre).join(', ');
+                                    } else {
+                                        return 'Ejecutivo no asignado.';
+                                    }
+                                }
+                            },
+                            {
+                                data: 'estado',
+                                render: function(data) {
+                                    return data == 1 ?
+                                        '<span class="badge badge-success">Cliente Disponible</span>' :
+                                        '<span class="badge badge-danger">Cliente Inactivo</span>';
+                                }
+                            },
+                            {
+                                data: null,
+                                orderable: false,
+                                render: function(data) {
+                                    var baseUrl = "{{ url('superadmin/editarServicio') }}";
+                                    var urlServicio = "{{ url('superadmin/verServicio') }}";
+                                    return `
+                                    <a href="${baseUrl}/$" class="btn btn-primary">Ver servicio</a>
+                                    <a href="${baseUrl}/${data.id}" class="btn btn-secondary text-white">Editar servicio</a>
+                                    `;
+                                }
+                            },
+
+                        ]
+                    });
+                });
+            </script>
         @endpush
     @endsection

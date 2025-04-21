@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Desarrollo\Clientes;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Cliente;
 
 class clientesController
 {
@@ -14,6 +15,16 @@ class clientesController
     {
         $nameRoute = Route::currentRouteName();
         return view('Desarrollo.Clientes.clientes',compact('nameRoute'));
+    }
+
+
+   /**
+     * Get all clientes data.
+     */
+    public function apiClientes()
+    {
+        $clientes = Cliente::with('contratos')->get();
+        return response()->json(['data' => $clientes]);
     }
 
     /**

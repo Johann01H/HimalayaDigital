@@ -4,35 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use App\Models\Trafico_tarea;
+
 class Area extends Model
 {
-    protected $fillable =[
+
+    protected $table = "areas";
+
+    protected $fillable = [
+
         'id',
         'nombre',
-        'extencion_tel',
+        'descripcion',
         'horas_consumidas',
         'estado',
+        'created_at',
+        'updated_at'
+
     ];
 
 
-    public function users(): HasMany
+    public function solicitudes(): HasMany
     {
-        return $this->hasMany(User::class);
+        return $this->hasMany(Solicitud::class, 'area_id', 'id');
     }
 
-    public function tareas(): HasMany
-    {
-        return $this->hasMany(Tarea::class);
-    }
-
-    public function requerimientos_ots(): HasMany
-    {
-        return $this->hasMany(Requerimientos_ots::class);
-    }
-
-    public function traficos_tareas(): HasMany
-    {
-        return $this->hasMany(Trafico_tarea::class);
-    }
 }

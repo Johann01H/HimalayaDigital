@@ -6,328 +6,150 @@ use Carbon\Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Testing\Fakes\Fake;
 
-    //  Evidencia de realización, tener encuenta lo largo del codigo, la cual la captura suele salir muy extensa
-    //  y no se puede mostrar en la pantalla, por lo larga que es.
 class fakeDataController
 {
-    public function users()
+
+    // Creación de datos falsos de usuarios.
+
+    public function usuarios()
     {
-        for ($i=0; $i < 10 ; $i++) {
+        for ($i=0; $i <= 10 ; $i++) {
             $Faker = Faker::create();
-            $data  = [
+            $data = [
                 'nombre' => $Faker->name(),
                 'apellido' => $Faker->lastName(),
-                'cargo'=> $Faker->randomElement([
-                    'Ejecutiva de cuentas',
-                    'Director Creativo',
-                    'Director Estrategico',
-                    'Development Leader',
-                    'Tester',
-                    'Diseñador grafico',
-                    'Accoun Executive',
+                'cargo' => $Faker->randomElement([
+                    'Desarrollo Web',
+                    'Practicante en Contenidos - CM',
                     'Content Manager',
-                    'Data specialist',
-                    'Community Manager',
-                    'Practicante En Diseño Gráfico',
-                    'Web Development'
-            ]),
-                'email' => $Faker->email(),
-                'telefono' => $Faker->phoneNumber(),
-                'password' => Hash::make($Faker->password()),
-                'fecha_nacimiento' => $Faker->date(),
-                'img_perfil' => $Faker->imageUrl(),
-                'api_token' => $Faker->regexify('[A-Za-z0-9]{60}'),
-                'estado' == 1,
-                'roles_id' => $Faker->numberBetween(1,6),
-                'areas_id' => $Faker->numberBetween(1,10),
-                'created_at' => now(),
-                'updated_at' => now()
-            ];
-            DB::table('users')->insert($data);
-        }
-    }
-
-    public function setFakeAreas()
-    {
-        for ($i=0; $i < 10 ; $i++) {
-
-            $Faker = Faker::create();
-            $data = [
-                'name' => $Faker->name(),
-                'extencion_tel' => $Faker->randomElement(),
-                'horas_consumidas' => $Faker->randomFloat(),
-                'estado' == 1
-            ];
-            DB::table('areas')->insert($data);
-        }
-        return "<h2>Datos insertados correctamente!!</h2>";
-    }
-
-    public function setFakeClientes()
-    {
-        for($i = 0; $i < 10; $i++ )
-        {
-            $Faker = Faker::create();
-
-            $data = [
-                'nombre' => $Faker->name(),
-                'nit' => $Faker->regexify(),
-                'email' => $Faker->email(),
-                'telefono' => $Faker->phoneNumber(),
-                'nombre_contacto' => $Faker->name(),
-                'razon_social' => $Faker->word(),
-                'user_id'=> $Faker->numberBetween(1,10),
-                'estado' == 1
-
-            ];
-
-            Db::table('clientes')->insert($data);
-        }
-        return "<h2>Datos insertados correctamente!!</h2>";
-    }
-
-    public function setFakeComentarios()
-    {
-        for ($i=0; $i <10 ; $i++) {
-
-            $Faker = Faker::create();
-            $data = [
-                'comentarios' => $Faker->sentence(),
-                'usuarios_comentarios_id' => $Faker->numberBetween(1,10)
-            ];
-            DB::table('comentarios')->insert($data);
-        }
-        return "<h2>Datos insertados correctamente!!</h2>";
-    }
-
-    public function setFakeTareas()
-    {
-        for($i=0; $i < 10; $i++)
-        {
-            $Faker = Faker::create();
-            $data = [
-
-                'nombre_tarea' => $Faker->randomElement([
-                'Pauta Descuento Droguerías - Gif días de descuento por iniciar mes ',
-                'Pauta Tennis de campo',
-                'Pauta Descuento Droguerías - Gif días de descuento...',
-                'Pauta concierto de la cuna a la jungla - Cali',
-                'Informe Resultados Pauta descuentos Droguerìas',
-                'Pauta cursos Cali Abril - Preparación a base de cafe',
-                'Pauta cursos Cali Abril Automaquillaje',
-                'Pauta cursos Cali Abril Decoración y extensión de ...',
-                'Pauta cursos Cali Abril - Secretariado sistematizado contable',
-                'Pauta cursos Cali Abril - Cocina mexicana',
-                'Capacitación Directivos de Comfandi',
+                    'Manager',
+                    'Ejecutiva de Cuentas',
+                    'New Bussines',
+                    'Practicante en Diseño Gráfico',
                 ]),
-                'fecha_entrega_area' => $Faker->dateTime()->format('Y-m-d H:i:s'),
-                'fecha_entrega_cuentas' => $Faker->dateTime()->format('Y-m-d H:i:s'),
-                'descripcion' => implode('/n',$Faker -> paragraphs(3)),
-                'enlaces_externos' => $Faker->sentence(),
-                'id_evento' => $Faker->regexify(),
-                'fecha_inicio_programa' => $Faker->dateTime()->format('Y-m-d H:i:s'),
-                'fecha_fin_programa' => $Faker->dateTime()->format('Y-m-d H:i:s'),
-                'fecha_tentativa_cliente' => $Faker->dateTime()->format('Y-m-d H:i:s'),
-                'fecha_entrega_cliente_real' => $Faker->dateTime()->format('Y-m-d H:i:s'),
-                'tiempo_estimado' => $Faker->randomFloat(15,2),
-                'tiempo_real' => $Faker->randomFloat(15,2),
-                'tiempo_mapa_cliente' => $Faker->randomFloat(15,2),
-                'recurrente' => 1,
-                'fecha_entrega_cliente' => $Faker->dateTime()->format('Y-m-d H:i:s'),
-                'fecha_inicio_recurrencia' => now(),
-                'fecha_final_recurrencia' => now(),
-                'estados_id' => $Faker->numberBetween(1,10),
-                'areas_id' => $Faker->numberBetween(1,10),
-                'usuarios_id' => $Faker->numberBetween(1,10),
-                'ots_id' => $Faker->numberBetween(1,10),
-                'planeaciones_fases_id' => $Faker->numberBetween(1,10),
-                'requerimientos_clientes_id' => $Faker->numberBetween(1,10),
-                'created_at'=> Carbon::now('America/Bogota')->format('Y,m,d H:i:s'),
-                'updated_at'=> Carbon::now('America/Bogota')->format('Y,m,d H:i:s'),
-                'deleted_at'=> Carbon::now('America/Bogota')->format('Y,m,d H:i:s'),
-
-            ];
-            DB::table('tareas')->insert($data);
-        }
-        return "<h2>Datos insertados correctamente!!</h2>";
-    }
-
-
-    public function setFakeOts()
-    {
-        for ($i=0; $i < 10 ; $i++) {
-
-            $Faker = Faker::create();
-            $data = [
-                'nombre' => $Faker->randomElement([
-                    'Pauta Descuentos Droguerias',
-                    'Pauta Escuelas Deportiva Tennis deCampo',
-                    'Pauta Concierto de la Cuna a la Jungla',
-                    'Pauta Cursos Abril',
-                    'Himalaya - Coordinación',
-                    'Fee de Mantenimiento al E-Commerce',
-                    'Fee Posicionamiento SEO ',
-                    'Fee de SEO mes de Abril',
-                    'Fee Mensual Abril',
-                    'Sitio de Constructora Meléndez - Renovación Host, ...',
-                    'Fee de Soporte en Desarrollo para sitio web'
-                ]),
-                'referencia'=> $Faker->numberBetween(1000, 100000),
-                'valor' => $Faker->regexify(),
-                'fee' == 1,
-                'horas_totales' => $Faker->randomFloat(15,2),
-                'horas_disponibles' => $Faker->randomFloat(15,2),
-                'total_horas_extra' => $Faker->randomFloat(15,2),
-                'observaciones' => $Faker->paragraphs(),
-                'fecha_inicio' =>  $Faker->date(),
-                'fecha_final' => $Faker->date(),
-                'estado' == 1,
-                'users_id' => $Faker->numberBetween(1,10),
-                'estados_id' => $Faker->numberBetween(1,10),
-                'clientes_id' => $Faker->numberBetween(1,10),
-                'created_at'=> now(),
-                'updated_at'=> now(),
-            ];
-            DB::table('ots')->insert($data);
-        }
-        return "<h2>Datos insertados correctamente!!</h2>";
-    }
-
-    public function setFakeTraficoTareas()
-    {
-        for ($i=0; $i < 10 ; $i++) {
-            $Faker = Faker::create();
-            $data = [
-                'nombre' => $Faker->name(),
-                'fecha_entrega_estimada' => $Faker->dateTime()->format('Y-m-d H:i:s'),
+                'direccion' => $Faker->address(),
                 'descripcion' => $Faker->sentence(),
-                'enlaces_externos' => $Faker->url(),
-                'tiempo_estimado' => $Faker->randomFloat(15,2),
-                'tiempo_real' => $Faker->randomFloat(15,2),
-                'fecha_entrega_cliente' => $Faker->dateTime()->format('Y-m-d H:i:s'),
-                'estados_id' => $Faker->numberBetween(1,10),
-                'areas_id' => $Faker->numberBetween(1,10),
-                'users_id' => $Faker->numberBetween(1,10),
-                'roles_id' => $Faker->numberBetween(1,6),
-                'ots_id' => $Faker->numberBetween(1,10),
-                'created_at'=> Carbon::now('America/Bogota')->format('Y-m-d H:i:s'),
-                'updated_at'=> Carbon::now('America/Bogota')->format('Y-m-d H:i:s'),
-            ];
-            DB::table('trafico_tareas')->insert($data);
-        }
-        return "<h2>Datos insertados correctamente!!</h2>";
-    }
-
-
-    public function setFakeEstado_X_Roles()
-    {
-        for ($i=0; $i < 10 ; $i++) {
-            $Faker = Faker::create();
-            $data = [
-                'estado_id' => $Faker->numberBetween(1,25),
-                'roles_id' => $Faker->numberBetween(1,6)
-            ];
-            DB::table('Estado_x_roles')->insert($data);
-        }
-        return "<h2>Datos insertados correctamente!!</h2>";
-    }
-
-    public function setFakeRoleUser()
-    {
-        for ($i=0; $i < 10 ; $i++) {
-            $Faker = Faker::create();
-            $data = [
-                'user_id' => $Faker->numberBetween(1,10),
-                'roles_id' => $Faker->numberBetween(1,6)
-            ];
-            DB::table('role_user')->insert($data);
-        }
-        return "<h2>Datos insertados correctamente!!</h2>";
-    }
-
-
-    public function setFaketiempoArea()
-    {
-        for ($i=0; $i < 10 ; $i++) {
-            $Faker = Faker::create();
-            $data = [
-                'tiempo_estimado_ot' => $Faker->randomFloat(15,2),
-                'tiempo_extra' => $Faker->randomFloat(15,2),
-                'ots_id' => $Faker->numberBetween(1,10),
-                'areas_id' => $Faker->numberBetween(1,10),
-            ];
-            DB::table('tiempo_x_area')->insert($data);
-        }
-        return "<h2>Datos insertados correctamente!!</h2>";
-    }
-
-
-    public function setFakeHistoricoClientes()
-    {
-        for ($i=0; $i < 10 ; $i++) {
-            $Faker = Faker::create();
-            $data = [
-                'nombre' => $Faker->name(),
-                'nit' => $Faker->regexify(),
+                'habilidades' => $Faker->randomElement([
+                    'Gestión del Caos',
+                    'Aprendiz Rápido con Turbo',
+                    'Trabajo en Equipo con Flow',
+                    'Maestro del Backend',
+                    'Control de versiones (Git)',
+                    'Gestión de Bases de Datos',
+                ]),
+                'fecha_nacimiento' => $Faker->date(),
                 'email' => $Faker->email(),
-                'telefono' => $Faker->phoneNumber(),
-                'nombre_contacto' => $Faker->name(),
-                'razon_social' => $Faker->sentence(),
-                'cliente_id' => $Faker->numberBetween(1,10),
-                'users_id' => $Faker->numberBetween(1,10),
-                'created_at' => now(),
-                'updated_at' => now(),
+                'password' => Hash::make($Faker->password()),
+                'area_id' => $Faker->numberBetween(1,5),
+                'img_perfil_id' => $Faker->numberBetween(1,10),
+
             ];
-            DB::table('historico_clientes')->insert($data);
+            DB::table('usuarios')->insert($data);
         }
-        return "<h2>Datos insertados correctamente!!</h2>";
+        return "<h1>Datos de usuarios ingresados correctamente</h1>";
     }
 
-    public function setFakeHistoricoOts()
+    // Creación de datos falsos de imagenes de los perfiles.
+
+    public function img_perfiles()
     {
         for ($i=0; $i < 10 ; $i++) {
+            $Faker = Faker::create();
+            $data = [
+                'ruta_imagen' => $Faker->url(),
+                'nombre_archivo' => $Faker->mimeType() ,
+                'tipo_imagen' => $Faker->fileExtension(),
+            ];
+            DB::table('imagenes_perfil')->insert($data);
+        }
+        return "<h1>Datos de imagenes ingresados correctamente</h1>";
+    }
+
+    // Creación de datos falsos de clientes.
+
+    public function clientes()
+    {
+        for ($i=0; $i <= 10 ; $i++) {
+            $Faker = Faker::create();
+            $data = [
+
+                'nombre'=> $Faker->name(),
+                'sitio_web' => $Faker->url(),
+                'email' => $Faker->email(),
+                'telefono' => $Faker->phoneNumber() ,
+                'telefono_referencia' => $Faker->phoneNumber(),
+                'usuario_id' => $Faker->numberBetween(1,14),
+                'contrato_id' => $Faker->numberBetween(1,2),
+                'estado' => 1
+
+            ];
+            DB::table('clientes')->insert($data);
+        }
+        return "<h1>Datos de clientes ingresados correctamente</h1>";
+    }
+
+    // Creación de datos falsos de tableros.
+
+    public function tableros()
+    {
+        for ($i=0; $i <= 10 ; $i++) {
+            $Faker = Faker::create();
+            $data = [
+
+                'nombre'=> $Faker->name(),
+                'descripcion' => $Faker->sentences(),
+                'cliente_id' => $Faker->numberBetween(1,10),
+
+            ];
+            DB::table('tableros')->insert($data);
+        }
+        return "<h1>Datos de clientes ingresados correctamente</h1>";
+    }
+
+    // Creación de datos falsos de las redes sociales.
+
+    public function redes_sociales()
+    {
+        for ($i=0; $i < 10 ; $i++) {
+
+            $Faker = Faker::create();
+            $data = [
+                'nombre' => $Faker->randomElement(['Facebook','Instagram','Youtube']),
+                'url' => $Faker->url(),
+                'estado' => 1,
+            ];
+            DB::table('redes_sociales')->insert($data);
+        }
+        return "<h1>Datos de las redes sociales ingresados correctamente.  </h1>";
+    }
+
+    // Creación de datos falsos de las redes sociales.
+
+    public function solicitudes ()
+    {
+        for ($i=0; $i < 10 ; $i++) {
+
             $Faker = Faker::create();
             $data = [
                 'nombre' => $Faker->name(),
-                'referencia' => $Faker->sentence(),
-                'valor' => $Faker->regexify(),
-                'fee' == 1,
-                'horas_totales' => $Faker->randomFloat(),
-                'horas_disponibles' => $Faker->randomFloat(),
-                'total_horas_extra' => $Faker->randomFloat(),
-                'observaciones' => $Faker->paragraph(),
-                'requerimiento_ot' => $Faker->sentence(),
-                'fecha_inicio' => $Faker->dateTime(),
-                'fecha_fin' => $Faker->dateTime(),
-                'clientes_id' => $Faker->numberBetween(1,10),
-                'user_id' => $Faker->numberBetween(1,10),
-                'estados_id' => $Faker->numberBetween(1,25),
-
-            ];
-            DB::table('historico_ots')->insert($data);
-        }
-        return "<h2>Datos insertados correctamente!!</h2>";
-    }
-
-    public function setFakeHistoricoTareas()
-    {
-        for ($i=0; $i < 10 ; $i++) {
-            $Faker = Faker::create();
-            $data = [
-                'tiempo_estimado' => $Faker->randomFloat(),
-                'tiempo_real' => $Faker->randomFloat(),
-                'comentarios_id' => $Faker->numberBetween(1,10),
-                'tareas_id' => $Faker->numberBetween(1,10),
-                'usuarios_id' => $Faker->numberBetween(1,10),
-                'estados_id' => $Faker->numberBetween(1,10),
-                'fecha_entrega_area' => $Faker->dateTime(),
+                'descripcion' => $Faker->sentence(),
+                'fecha_entrega_cliente'=> $Faker->dateTime(),
                 'fecha_entrega_cuentas' => $Faker->dateTime(),
-                'created_at' => now(),
-                'updated_at' => now(),
+                'prioridad_id' => $Faker->numberBetween(1,3),
+                'area_id' => $Faker->numberBetween(1,5),
+                'fase_servicio_id' => $Faker->numberBetween(),
+                'tipo_estado_id' => $Faker->numberBetween(1,2),
+                'cliente_id' => $Faker->numberBetween(1,10),
+                'usuario_id' => $Faker->numberBetween(1,10),
+                'recurrente' => 0
             ];
-            DB::table('historico_ots')->insert($data);
+            DB::table('solicitudes')->insert($data);
         }
-
+        return "<h1>Datos de las redes sociales ingresados correctamente.  </h1>";
     }
+
+
+
 }

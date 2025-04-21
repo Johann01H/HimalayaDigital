@@ -5,22 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Estado extends Model
+class Contrato extends Model
 {
+    protected $table = "contratos";
 
     protected $fillable = [
 
         'id',
         'nombre',
         'descripcion',
-        'tipo_estado_id',
-        'created_at',
-        'updated_at'
+        'cliente_id',
+
     ];
 
-    public function tipoEstado(): BelongsTo
+    public function cliente(): BelongsTo
     {
-        return $this->belongsTo(Tipo_estado::class,'tipo_estado_id','id');
+        return $this->belongsTo(Cliente::class,'cliente_id','id');
     }
 
 }

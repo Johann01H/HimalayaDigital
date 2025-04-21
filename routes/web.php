@@ -3,22 +3,14 @@
 use App\Http\Controllers\Administrador\Home\homeController;
 use App\Http\Controllers\Auth\loginController;
 use App\Http\Controllers\Auth\resetPassword;
-use App\Http\Controllers\Desarrollo\Divisas\divisasController;
-use App\Http\Controllers\Desarrollo\FasesPlaneacion\fasesController;
-use App\Http\Controllers\Desarrollo\Ot\ordenController;
 use App\Http\Controllers\Auth\forgotPassword;
-use App\Http\Controllers\Desarrollo\Foros\Contenido\contenidoController;
-use App\Http\Controllers\Desarrollo\Foros\CreacionTareas\tareaController;
-use App\Http\Controllers\Desarrollo\Foros\Cuentas\cuentasController;
-use App\Http\Controllers\Desarrollo\Foros\Desarrollo\desarrolloController;
-use App\Http\Controllers\Desarrollo\Foros\DigitalPerformance\digitalController;
-use App\Http\Controllers\Desarrollo\Foros\Diseño\diseñoController;
-use App\Http\Controllers\Desarrollo\Foros\TraficoTareas\traficoController;
 use App\Http\Controllers\Desarrollo\Usuarios\usersHimalayaController;
 use App\Http\Controllers\generalController;
-use App\Http\Controllers\Desarrollo\Roles\rolesController;
+use App\Http\Controllers\Desarrollo\Herramientas\Areas\areasController;
+use App\Http\Controllers\Desarrollo\Herramientas\Roles\rolesController;
 use App\Http\Controllers\fakeDataController;
 use App\Http\Controllers\Desarrollo\Clientes\clientesController;
+use App\Http\Controllers\desarrollo\Herramientas\Servicios\serviciosController;
 use App\Http\Middleware\DisableCache;
 use App\Http\Middleware\Guest;
 use App\Http\Middleware\RememberMe;
@@ -30,8 +22,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 Route::middleware(Guest::class, DisableCache::class)->group(function () {
+
     Route::get('/', [loginController::class, 'showLogin'])->name('login');
     Route::get('/login', [loginController::class, 'showLogin'])->name('Iniciar sesión');
+
     Route::post('/credentialsUser', [loginController::class, 'login'])->name('login.user.credentials');
     Route::get('/ResetPassword', [resetPassword::class, 'showResetPassword'])->name('Restablecer contraseña');
     Route::post('/storeRestorePassword', [resetPassword::class, 'storeResetPassword'])->name('store.reset.password');
@@ -60,47 +54,34 @@ Route::middleware(['auth', DisableCache::class, RememberMe::class])->prefix('sup
         Route::get('/profileDevelopment/{id}', [generalController::class, 'showProfileUser'])->name('Perfil');
         Route::put('/update-image', [generalController::class, 'updateImage'])->name('image.update');
 
-        // Controladores OTS SuperAdministrador
 
+    // Controladores de areas Superadministrador
 
-        Route::controller(ordenController::class)->group(function(){
+    Route::controller(areasController::class)->group(function(){
+        Route::get('/Areas','index')->name('Áreas');
+        Route::get('/apiAreas','apiAreas')->name('areas.date');
+        Route::get('/createArea','create')->name('Crear área');
+        Route::post('/storeArea','store')->name('store.area');
+        Route::get('/editarArea/{id}','edit')->name('Editar Área');
+        Route::put('/actualizarArea/{id}','update')->name('actualizar.area');
+    });
 
-            Route::get('/listOt', 'index')->name('Listado de ordenes');
-            Route::get('/apiOts','getOts')->name('api.ots');
-            Route::get('/createOt',  'create')->name('Crear orden de trabajo');
-            Route::post('/store.create.ot','store')->name('store.create.ot');
-            Route::get('/descargar-excel','downloadExcel')->name('descargar.excel');
+    Route::controller(serviciosController::class)->group(function(){
+        Route::get('/servicios','index')->name('Servicios');
+        Route::get('/apiServicios','apiServicios')->name('api.servicios');
+        Route::get('/crearServicio','create')->name('Crear servicio');
+        Route::post('/storeServicios','store')->name('store.servicios');
+        Route::get('/editarServicio/{id}','edit')->name('Editar Servicio');
+        Route::put('/actualizarServicio/{id}','update')->name('actualizar.servicio');
 
-        });
+    });
 
-
-    // Controladores FasesPlaneación SuperAdministrador
-
-        Route::controller(fasesController::class)->group(function(){
-
-            Route::get('/fasesPlaneacion','index')->name('Fase del proyecto');
-            Route::get('/createPlaneacion',  'create')->name('Crear fase de planeación');
-            Route::post('/storePlaneacion', 'store')->name('store.fase.planeacion');
-            Route::get('/editFasePlaneacion/{id}','edit')->name('Actualizar fase de pleanación');
-            Route::put('/updateFasePlaneacion/{id}', 'update')->name('update.fase.planeación');
-
-        });
-
-    // Controladores Divisas SuperAdministrador
-
-        Route::controller(divisasController::class)->group(function(){
-
-            Route::get('/divisasDevelopment','index')->name('Divisas');
-            Route::get('/createDevelopment','create')->name('Crear divisa');
-            Route::post('/storeDivisaDevelopment','store')->name('store.divisa');
-            Route::get('/editDivisa/{id}','edit')->name('Actualizar divisa');
-            Route::put('/update.divisa/{id}','update')->name('update.divisa');
-
-        });
-
+    // Controladores de clientes SuperAdministrador
 
         Route::controller(clientesController::class)->group( function(){
             Route::get('/Clientes','index')->name('Clientes');
+            Route::get('/apiClientes','apiClientes')->name('api.clientes');
+
         });
 
     // Controladores de usuarios SuperAdministrador
@@ -120,23 +101,14 @@ Route::middleware(['auth', DisableCache::class, RememberMe::class])->prefix('sup
 
         Route::controller(rolesController::class)->group(function(){
 
-            Route::get('/forumRole', 'index')->name('Roles');
+            Route::get('/roles', 'index')->name('Roles');
+            Route::get('/apiRoles', 'apiRoles')->name('api.roles');
             Route::get('/createRoles','create')->name('Establecer un rol');
             Route::post('/storeRoles', 'store')->name('Roles.store');
-            Route::get('/editRoles/{id}',  'edit')->name('Actualizar Detalles del Rol');
+            Route::get('/editRoles/{id}',  'roles')->name('Actualizar rol');
             Route::put('/updateRoles/{id}',  'update')->name('update.roles');
 
         });
-
-        Route::get('/forumContent', [contenidoController::class, 'index'])->name('Foro contenido');
-        Route::get('/forumAccount', [cuentasController::class, 'index'])->name('Foro cuentas');
-        Route::get('/forumDevelopment', [desarrolloController::class, 'index'])->name('Foro desarrollo');
-        Route::get('/forumDesign', [diseñoController::class, 'index'])->name('Foro diseño');
-        Route::get('/forumDigitalPerformance', [digitalController::class, 'index'])->name('Foro digital performance');
-        Route::get('/traficHomeworks', [traficoController::class, 'index'])->name('Foro trafico de tareas');
-        Route::get('/forumCreateHomework', [tareaController::class, 'index'])->name('Crear tarea');
-        Route::get('/searchHomework', [tareaController::class, 'search'])->name('homework.search');
-
 
 
 });
@@ -153,7 +125,6 @@ Route::middleware(['auth', DisableCache::class])->prefix('colaborador')->group(f
     Route::get('home',[homeController::class,'index'])->name('Home Colaborador');
 
 });
-
 
 
 
@@ -201,6 +172,9 @@ Route::get('503', function () {
 
 //View Faker
 
-Route::get('setFakeComentarios',[fakeDataController::class,'setFakeComentarios'])->name('fakerComentario');
-Route::get('setFakeTareas',[fakeDataController::class,'setFakeTareas'])->name('fakerTareas');
-Route::get('setFakeTraficoTareas',[fakeDataController::class,'setFakeTraficoTareas'])->name('fakerTrafico');
+Route::get('setFakeUsuarios',[fakeDataController::class,'usuarios']);
+Route::get('setFakeTableros',[fakeDataController::class,'tableros']);
+Route::get('setFakeRedes',[fakeDataController::class,'redes_sociales']);
+Route::get('setFakeSolicitudes',[fakeDataController::class,'solicitudes']);
+Route::get('setFakePerfiles',[fakeDataController::class,'img_perfiles']);
+Route::get('setFakeClientes',[fakeDataController::class,'clientes']);

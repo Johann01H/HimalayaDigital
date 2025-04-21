@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App\Models\Usuario;
 
 class resetPassword
 {
@@ -15,7 +16,7 @@ class resetPassword
         $token = $request->query('token');
 
         // Verificar si el token existe en la tabla password_resets
-        $resetRecord = DB::table('password_resets')
+        $resetRecord = DB::table('password_reset_tokens')
             ->where('email', $email)
             ->where('token', $token)
             ->first();
@@ -47,24 +48,23 @@ class resetPassword
                 'token.required' => 'El token es obligatorio para restablecer la contraseña.',
             ];
 
-
-            $validatedData = $request->validate([
-                'email' => 'required|email|exists:users,email|max:250',
+             $request->validate([
+                'email' => 'required|email|exists:usuarios,email|max:250',
                 'password' => 'required|confirmed|min:8',
                 'token' => 'required',
             ],$message);
 
-            $resetRecord = DB::table('password_resets')
+            $resetRecord = DB::table('password_reset_tokens')
                 ->where('email', $request->email)
                 ->where('token', $request->token)->first();
 
             if (!$resetRecord) {
                 return redirect()->route('login')->with([
-                    'message' => '¡Usted ya realizó el cambio de contraseña!',
+                    'messageEmail' => '¡Usted ya realizó el cambio de contraseña!',
                     'showModal' => true
                 ]);
             }
-            $user = \App\Models\User::where('email', $request->email)->first();
+            $user = Usuario::where('email', $request->email)->first();
 
             if ($user) {
                 $user->update([
@@ -72,7 +72,7 @@ class resetPassword
                 ]);
             }
 
-            DB::table('password_resets')->where('email', $request->email)->delete();
+            DB::table('password_reset_tokens')->where('email', $request->email)->delete();
 
             return redirect()->route('login')->with('resetSuccess', 'Tu contraseña ha sido actualizada correctamente.');
     }

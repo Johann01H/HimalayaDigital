@@ -3,45 +3,64 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\belongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cliente extends Model
 {
+    protected $table = "clientes";
+
     protected $fillable = [
+
         'id',
         'nombre',
-        'nit',
-        'users_id',
+        'logo_cliente',
+        'sitio_web',
         'email',
+        'mapa_cliente',
         'telefono',
-        'nombre_contacto',
+        'telefono_referencia',
+        'usuario_id',
         'estado',
-        'razon_social',
+        'deleted_at'
+
     ];
 
-    public function user_customer():BelongsTo
+     /**
+     * Tre el usuario que pertece al cliente.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+
+    public function usuario(): belongsTo
     {
-        return $this->belongsTo(User::class,'users_id');
+        return $this->belongsTo(Usuario::class, 'usuario_id','id' );
     }
 
-    public function ots(): hasMany
+
+    /**
+     * Obtiene todos los contratos para el cliente.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+
+    public function contratos():HasMany
     {
-        return $this->hasMany(Ots::class);
+        return $this->hasMany(Contrato::class,'cliente_id','id');
     }
 
-    public function requierimientos_clientes(): hasMany
+
+    /**
+     * Obtiene todos los clientes para el usuario.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+
+    public function redes_sociales(): hasMany
     {
-        return $this->hasMany(Requerimientos_clientes::class);
+        return $this->hasMany(Red_social::class,'cliente_id','id');
     }
 
-    public function users(): hasMany
-    {
-        return $this->hasMany(Requerimientos_clientes::class);
-    }
 
-    public function historico_clientes(): hasMany
-    {
-        return $this->hasMany(Historico_clientes::class);
-    }
+
 }

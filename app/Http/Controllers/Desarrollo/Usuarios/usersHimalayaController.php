@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Desarrollo\Usuarios;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Usuario;
 use App\Models\Role;
 use App\Models\Area;
+use App\Models\Roles;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,7 +28,7 @@ class usersHimalayaController
         $inputQueryArea = $request->input('searchArea');
 
         // Consulta base de usuarios
-        $query = User::with('areas:id,nombre');
+        $query = Usuario::with('areas:id,nombre');
 
         // Filtrar por nombre si está presente
         if ($inputQuery) {
@@ -39,11 +40,11 @@ class usersHimalayaController
 
         // Filtrar por área si está presente
         if ($inputQueryArea) {
-            $query->where('areas_id', $inputQueryArea);
+            $query->where('area_id', $inputQueryArea);
         }
 
         // Paginar resultados
-        $requestName = $query->select(['id','nombre', 'apellido', 'cargo', 'areas_id'])
+        $requestName = $query->select(['id','nombre', 'apellido', 'cargo', 'area_id'])
             ->paginate(8);
 
         return view('Desarrollo.Equipo.usuarios', [
@@ -60,8 +61,8 @@ class usersHimalayaController
     public function create()
     {
         $areas = Area::all();
-        $roles = Role::all();
-        $usuarios = User::all();
+        $roles = Roles::all();
+        $usuarios = Usuario::all();
         $nameRoute = Route::currentRouteName();
         return view('Desarrollo.Equipo.crearUsuario', compact('nameRoute', 'usuarios', 'roles', 'areas'));
     }
@@ -134,10 +135,10 @@ class usersHimalayaController
             ],
             'fh-user' => 'required|date',
             'rl-user' => 'required|exists:roles,id|string',
-            'ar-user' => 'required|exists:areas,id|string',
+            'ar-user' => 'required|exists:area,id|string',
         ], $messages);
 
-        User::create([
+        Usuario::create([
             'nombre' => $validateData['nm-user'],
             'apellido' => $validateData['ap-user'],
             'email' => $validateData['em-user'],
@@ -148,7 +149,7 @@ class usersHimalayaController
             'horas_disponibles' => $validateData['hr-user'],
             'fecha_nacimiento' => $validateData['fh-user'],
             'roles_id' => $validateData['rl-user'],
-            'areas_id' => $validateData['ar-user'],
+            'area_id' => $validateData['ar-user'],
         ]);
 
         return redirect()->route('Usuarios')->with([
@@ -165,7 +166,7 @@ class usersHimalayaController
 
         if ($request->ajax()) {
             $search = $request->query('search');
-            $usuarios = User::where('nombre', 'LIKE', "%{$search}%")
+            $usuarios = Usuario::where('nombre', 'LIKE', "%{$search}%")
                 ->orWhere('email', 'LIKE', "%{$search}%");
 
             return response()->json([
@@ -176,12 +177,12 @@ class usersHimalayaController
 
         $areasFilter = $request->input('areasFilter');
         if ($areasFilter) {
-            $queryFilter = User::where('areas_id', $areasFilter)->get();
+            $queryFilter = Usuario::where('area_id', $areasFilter)->get();
         } else {
-            $queryFilter = User::all();
+            $queryFilter = Usuario::all();
         }
 
-        $usuarios = User::with('areas')->paginate(9);
+        $usuarios = Usuario::with('areas')->paginate(9);
         $areas = Area::all();
         $nameRoute = Route::currentRouteName();
 
@@ -195,7 +196,7 @@ class usersHimalayaController
      */
     public function show($id)
     {
-        $profile = User::findOrFail($id);
+        $profile = Usuario::findOrFail($id);
         $nameRoute = Route::currentRouteName();
         return view('Desarrollo.Home.profileDesarrollo', compact('nameRoute', 'profile'));
 
@@ -207,8 +208,8 @@ class usersHimalayaController
     public function edit($id)
     {
         $areas = Area::all();
-        $roles = Role::all();
-        $usuario = User::findOrFail($id);
+        $roles = Roles::all();
+        $usuario = Usuario::findOrFail($id);
         $nameRoute = Route::currentRouteName();
 
         return view('Desarrollo.Equipo.editarUsuario', compact('areas', 'roles', 'usuario', 'nameRoute'));
@@ -283,7 +284,7 @@ class usersHimalayaController
             'aru-user' => 'required|exists:areas,id|string',
         ], $messages);
 
-        $usuario = User::findOrFail($id);
+        $usuario = Usuario::findOrFail($id);
 
         $usuario->update([
             'nombre' => $validateData['nmu-user'],
@@ -296,7 +297,7 @@ class usersHimalayaController
             'horas_disponibles' => $validateData['hru-user'],
             'fecha_nacimiento' => $validateData['fhu-user'],
             'roles_id' => $validateData['rlu-user'],
-            'areas_id' => $validateData['aru-user'],
+            'area_id' => $validateData['aru-user'],
         ]);
 
         return redirect()->route('Usuarios')->with([

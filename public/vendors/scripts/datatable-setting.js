@@ -1,9 +1,10 @@
 $('document').ready(function(){
+
     $('.data-table').DataTable({
         scrollCollapse: true,
         autoWidth: false,
         responsive: true,
-        searching: false,
+        searching: true,
         columnDefs: [{
             targets: "datatable-nosort",
             orderable: true,
@@ -29,7 +30,6 @@ $('document').ready(function(){
         }
     });
 
-    $('.dataTables_length').hide();
 
     $('.data-table-export').DataTable({
         scrollCollapse: true,

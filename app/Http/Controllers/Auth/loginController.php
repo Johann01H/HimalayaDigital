@@ -15,6 +15,7 @@ class loginController
 
     public function login(Request $request)
     {
+
         $messages = [
             'email.required' => 'El campo correo electrónico es obligatorio.',
             'email.email' => 'Por favor, ingresa un correo electrónico válido.',
@@ -24,7 +25,7 @@ class loginController
 
 
         $request->validate([
-            'email' => ['required', 'email', 'exists:users,email'],
+            'email' => ['required', 'email', 'exists:usuarios,email'],
             'password' => ['required'],
         ], $messages);
 
@@ -32,23 +33,18 @@ class loginController
 
         $remember = $request->has('remember');
 
-
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            return redirect()->route([
-                1 => 'Página principal',
-                2 => 'Home Administrador',
-                3 => 'Home Colaborador',
-            ][Auth::user()->roles_id] ?? 'login');
+            $userRole = Auth::user()->rol_id;
 
-        } else {
-            return redirect()->route('login')->with('loginError', 'Las credenciales ingresadas no son correctas. Verifique su correo y contraseña e intente nuevamente.');
-        }
-        ;
+            return match($userRole) {
+                1 => redirect()->route('Página principal'),
+                2 => redirect()->route('Home Administrador'),
+                3 => redirect()->route('Home Colaborador'),
+            };
+        }else{
+           return redirect()->route('Iniciar sesión')->with('loginError', 'El usuario ingresado no se encuentra registrado en el sistema. Por favor, verifique sus datos e intente nuevamente.');
+        };
     }
-
-
-
 }
-
